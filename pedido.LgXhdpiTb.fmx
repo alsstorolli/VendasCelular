@@ -1,0 +1,56 @@
+inherited FPedido_LgXhdpiTb: TFPedido_LgXhdpiTb
+  ClientHeight = 829
+  ClientWidth = 480
+  DesignerMasterStyle = 3
+  inherited tabc: TTabControl
+    Size.Width = 480.000000000000000000
+    Size.Height = 829.000000000000000000
+    inherited TabItem1: TTabItem
+      Size.Width = 160.000000000000000000
+      ExplicitSize.cx = 317.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      inherited sg: TStringGrid
+        Position.Y = 602.000000000000000000
+        Size.Width = 480.000000000000000000
+        Viewport.Width = 480.000000000000000000
+        Viewport.Height = 141.000000000000000000
+      end
+      inherited ToolBar1: TToolBar
+        Size.Width = 480.000000000000000000
+      end
+    end
+    inherited TabItem3: TTabItem
+      Size.Width = 160.000000000000000000
+      ExplicitSize.cx = 317.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      inherited sgpedidos: TStringGrid
+        Viewport.Width = 713.000000000000000000
+        Viewport.Height = 175.000000000000000000
+      end
+      inherited sgpedidosd: TStringGrid
+        Viewport.Width = 480.000000000000000000
+        Viewport.Height = 170.000000000000000000
+      end
+      inherited Edtotalpedidos: TNumberBox
+        Enabled = False
+      end
+    end
+    inherited TabItem2: TTabItem
+      Size.Width = 160.000000000000000000
+      ExplicitSize.cx = 316.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      inherited Edatedata: TDateEdit
+        TabOrder = 17
+      end
+      inherited sbcriaportadores: TSpeedButton
+        TextSettings.Font.Size = 10.000000000000000000
+      end
+      inherited sbcriaprodutos: TSpeedButton
+        TextSettings.Font.Size = 10.000000000000000000
+      end
+      inherited sbcriaclientes: TSpeedButton
+        TextSettings.Font.Size = 10.000000000000000000
+      end
+    end
+  end
+end

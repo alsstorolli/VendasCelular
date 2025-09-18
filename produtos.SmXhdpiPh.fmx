@@ -1,0 +1,14 @@
+inherited Fprodutos_SmXhdpiPh: TFprodutos_SmXhdpiPh
+  ClientHeight = 375
+  ClientWidth = 250
+  DesignerMasterStyle = 3
+  inherited sg: TStringGrid
+    Position.Y = 10.000000000000000000
+    Size.Width = 250.000000000000000000
+    Viewport.Width = 250.000000000000000000
+    Viewport.Height = 333.000000000000000000
+  end
+  inherited ToolBar1: TToolBar
+    Size.Width = 250.000000000000000000
+  end
+end

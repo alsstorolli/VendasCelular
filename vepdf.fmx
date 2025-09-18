@@ -1,0 +1,33 @@
+object FVePDF: TFVePDF
+  Left = 0
+  Top = 0
+  Caption = 'Visualiza PDF'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCloseQuery = FormCloseQuery
+  DesignerMasterStyle = 3
+  object Panel1: TPanel
+    Align = MostTop
+    Size.Width = 640.000000000000000000
+    Size.Height = 73.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+  end
+  object Panel2: TPanel
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 407.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object WebBrowser: TWebBrowser
+      Align = Client
+      Size.Width = 640.000000000000000000
+      Size.Height = 407.000000000000000000
+      Size.PlatformDefault = False
+      WindowsEngine = IEOnly
+    end
+  end
+end

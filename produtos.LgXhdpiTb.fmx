@@ -1,0 +1,14 @@
+inherited Fprodutos_LgXhdpiTb: TFprodutos_LgXhdpiTb
+  ClientHeight = 829
+  ClientWidth = 480
+  DesignerMasterStyle = 3
+  inherited sg: TStringGrid
+    Position.Y = 464.000000000000000000
+    Size.Width = 480.000000000000000000
+    Viewport.Width = 480.000000000000000000
+    Viewport.Height = 333.000000000000000000
+  end
+  inherited ToolBar1: TToolBar
+    Size.Width = 480.000000000000000000
+  end
+end

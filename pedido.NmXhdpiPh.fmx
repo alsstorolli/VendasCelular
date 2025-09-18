@@ -1,0 +1,152 @@
+inherited FPedido_NmXhdpiPh: TFPedido_NmXhdpiPh
+  ClientHeight = 615
+  ClientWidth = 400
+  DesignerMasterStyle = 3
+  inherited tabc: TTabControl
+    Size.Width = 400.000000000000000000
+    Size.Height = 615.000000000000000000
+    inherited TabItem1: TTabItem
+      Size.Width = 133.000000000000000000
+      ExplicitSize.cx = 317.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      inherited sg: TStringGrid
+        Position.Y = 388.000000000000000000
+        Size.Width = 400.000000000000000000
+        Viewport.Width = 400.000000000000000000
+        Viewport.Height = 141.000000000000000000
+      end
+      inherited sbconfirma: TSpeedButton
+        Position.Y = 226.000000000000000000
+      end
+      inherited Edportador: TEdit
+        Position.Y = 205.000000000000000000
+      end
+      inherited sbportador: TSpeedButton
+        Position.Y = 196.000000000000000000
+      end
+      inherited sbcondicao: TSpeedButton
+        Position.Y = 198.000000000000000000
+      end
+      inherited Edcondicao: TEdit
+        Position.Y = 204.000000000000000000
+      end
+      inherited EdQtde: TEdit
+        Position.Y = 249.000000000000000000
+      end
+      inherited EdUnitario: TEdit
+        Position.Y = 248.000000000000000000
+      end
+      inherited ToolBar1: TToolBar
+        Size.Width = 400.000000000000000000
+      end
+    end
+    inherited TabItem3: TTabItem
+      Size.Width = 133.000000000000000000
+      ExplicitSize.cx = 317.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      inherited sgpedidos: TStringGrid
+        Size.Height = 184.000000000000000000
+        Viewport.Width = 713.000000000000000000
+        Viewport.Height = 152.000000000000000000
+        inherited Numero: TStringColumn
+          Size.Width = 60.000000000000000000
+        end
+        inherited cliente: TStringColumn
+          Position.X = 60.000000000000000000
+          Size.Width = 180.000000000000000000
+        end
+        inherited data: TStringColumn
+          Position.X = 240.000000000000000000
+        end
+        inherited valor: TStringColumn
+          Position.X = 330.000000000000000000
+        end
+      end
+      inherited sgpedidosd: TStringGrid
+        Position.Y = -116.000000000000000000
+        Size.Height = 166.000000000000000000
+        Viewport.Width = 400.000000000000000000
+        Viewport.Height = 129.000000000000000000
+        inherited StringColumn7: TStringColumn
+          Size.Width = 60.000000000000000000
+        end
+        inherited StringColumn8: TStringColumn
+          Position.X = 60.000000000000000000
+          Size.Width = 180.000000000000000000
+        end
+        inherited StringColumn9: TStringColumn
+          Header = 'UN'
+          Position.X = 240.000000000000000000
+          Size.Width = 40.000000000000000000
+        end
+        inherited StringColumn10: TStringColumn
+          Header = 'Qtde'
+          Position.X = 280.000000000000000000
+          Size.Width = 70.000000000000000000
+        end
+        inherited StringColumn11: TStringColumn
+          Position.X = 350.000000000000000000
+        end
+        inherited StringColumn12: TStringColumn
+          Position.X = 430.000000000000000000
+        end
+      end
+      inherited EdData: TDateEdit
+        Position.Y = 203.000000000000000000
+      end
+      inherited batualiza: TCornerButton
+        Position.X = 3.000000000000000000
+        Position.Y = 246.000000000000000000
+        Size.Height = 51.000000000000000000
+      end
+      inherited benviapedidos: TCornerButton
+        Position.X = 174.000000000000000000
+        Position.Y = 246.000000000000000000
+        Size.Height = 51.000000000000000000
+      end
+    end
+    inherited TabItem2: TTabItem
+      Size.Width = 134.000000000000000000
+      ExplicitSize.cx = 316.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      inherited sbcriabanco: TSpeedButton
+        Position.Y = 238.000000000000000000
+        Size.Width = 156.000000000000000000
+      end
+      inherited sblimpapedidos: TSpeedButton
+        Position.Y = 400.000000000000000000
+        Size.Width = 125.000000000000000000
+      end
+      inherited Edatedata: TDateEdit
+        Position.X = 27.000000000000000000
+        Position.Y = 428.000000000000000000
+        TabOrder = 46
+      end
+      inherited EdPasta01ftp: TEdit
+        Position.Y = 266.000000000000000000
+      end
+      inherited EdPasta02ftp: TEdit
+        Position.Y = 308.000000000000000000
+      end
+      inherited spsalvaconfig: TSpeedButton
+        Position.X = 178.000000000000000000
+        Position.Y = 352.000000000000000000
+      end
+      inherited sbcriaportadores: TSpeedButton
+        Position.Y = 308.000000000000000000
+      end
+      inherited sbcriaprodutos: TSpeedButton
+        Position.Y = 337.000000000000000000
+      end
+      inherited sbcriaclientes: TSpeedButton
+        Position.Y = 367.000000000000000000
+      end
+      inherited Panel2: TPanel
+        Position.Y = 196.000000000000000000
+        inherited sbimportaproduto: TSpeedButton
+          Position.Y = -27.000000000000000000
+        end
+      end
+    end
+  end
+end

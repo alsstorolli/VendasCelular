@@ -1,0 +1,199 @@
+object FCadClientes: TFCadClientes
+  Left = 0
+  Top = 0
+  Caption = 'Cadastro de Clientes'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object Panel1: TPanel
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Layout1: TLayout
+      Align = Horizontal
+      Position.X = 21.000000000000000000
+      Position.Y = 144.000000000000000000
+      Size.Width = 602.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      object EdNomeFantasia: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        MaxLength = 50
+        Size.Width = 602.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Nome Fantasia'
+        OnValidate = EdNomeFantasiaValidate
+      end
+    end
+    object Panel2: TPanel
+      Align = FitLeft
+      Size.Width = 21.000000000000000000
+      Size.Height = 480.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'panelstyle'
+      TabOrder = 6
+      object ColorQuad1: TColorQuad
+        Alpha = 1.000000000000000000
+        Align = Client
+        Lum = 1.000000000000000000
+        Size.Width = 21.000000000000000000
+        Size.Height = 480.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+    end
+    object Layout2: TLayout
+      Align = Horizontal
+      Position.X = 21.000000000000000000
+      Position.Y = 190.000000000000000000
+      Size.Width = 602.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      object EdRazaosocial: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        MaxLength = 50
+        Size.Width = 602.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Raz'#227'o Social'
+      end
+    end
+    object bgravar: TCornerButton
+      StyledSettings = [Family, Size]
+      Position.X = 121.000000000000000000
+      Position.Y = 48.000000000000000000
+      Sides = [Top, Left, Bottom, Right]
+      Size.Width = 91.000000000000000000
+      Size.Height = 73.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Text = 'Salvar'
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claCrimson
+      XRadius = 3.000000000000000000
+      YRadius = 3.000000000000000000
+      OnClick = bgravarClick
+    end
+    object Panel3: TPanel
+      Align = FitRight
+      Position.X = 623.000000000000000000
+      Size.Width = 17.000000000000000000
+      Size.Height = 480.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'panelstyle'
+      TabOrder = 5
+      object ColorQuad2: TColorQuad
+        Alpha = 1.000000000000000000
+        Align = Client
+        Size.Width = 17.000000000000000000
+        Size.Height = 480.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+    end
+    object Layout3: TLayout
+      Align = Horizontal
+      Position.X = 21.000000000000000000
+      Position.Y = 236.000000000000000000
+      Size.Width = 602.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object EdCnpjcpf: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        KeyboardType = NumberPad
+        MaxLength = 14
+        Size.Width = 602.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'CNPJ / CPF'
+      end
+    end
+    object Layout4: TLayout
+      Align = Horizontal
+      Position.X = 21.000000000000000000
+      Position.Y = 282.000000000000000000
+      Size.Width = 602.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object EdIerg: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        KeyboardType = NumberPad
+        MaxLength = 15
+        Size.Width = 602.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Inscri'#231#227'o Estadual'
+      end
+    end
+    object Layout5: TLayout
+      Align = Horizontal
+      Position.X = 21.000000000000000000
+      Position.Y = 328.000000000000000000
+      Size.Width = 602.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object Edendereco: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        MaxLength = 50
+        Size.Width = 602.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Endere'#231'o com n'#250'mero'
+      end
+    end
+    object Layout6: TLayout
+      Align = Horizontal
+      Position.X = 21.000000000000000000
+      Position.Y = 375.000000000000000000
+      Size.Width = 602.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+      object edcep: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Right
+        TabOrder = 1
+        KeyboardType = NumberPad
+        MaxLength = 8
+        Position.X = 481.000000000000000000
+        Position.Y = 9.000000000000000000
+        Size.Width = 121.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'CEP'
+      end
+      object EdBairro: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 0
+        MaxLength = 25
+        Position.Y = 9.000000000000000000
+        Size.Width = 169.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Bairro'
+      end
+    end
+  end
+end

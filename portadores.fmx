@@ -1,0 +1,88 @@
+object FPortadores: TFPortadores
+  Left = 0
+  Top = 0
+  Caption = 'Portadores'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnActivate = FormActivate
+  DesignerMasterStyle = 0
+  object sg: TStringGrid
+    Align = Bottom
+    CanFocus = True
+    ClipChildren = True
+    Position.Y = 200.000000000000000000
+    Size.Width = 640.000000000000000000
+    Size.Height = 280.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    RowHeight = 41.000000000000000000
+    RowCount = 0
+    Options = [AlternatingRowBackground, ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, AlwaysShowSelection, Tabs, Header, AutoDisplacement]
+    OnSelectCell = sgSelectCell
+    OnSelChanged = sgSelChanged
+    Viewport.Width = 636.000000000000000000
+    Viewport.Height = 255.000000000000000000
+  end
+  object EdNome: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 1
+    Position.X = 19.000000000000000000
+    Position.Y = 62.000000000000000000
+    Size.Width = 236.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Nome'
+  end
+  object ToolBar1: TToolBar
+    Align = None
+    Size.Width = 356.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    object sb: TSpeedButton
+      Position.X = 282.000000000000000000
+      Position.Y = 49.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'donetoolbutton'
+      Text = 'OK'
+      OnClick = sbClick
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = dm.TabPortadores
+    ScopeMappings = <>
+    Left = 168
+    Top = 224
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 196
+    Top = 325
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = sg
+      Columns = <
+        item
+          MemberName = 'port_codigo'
+          Header = 'Codigo'
+        end
+        item
+          MemberName = 'port_descricao'
+          Header = 'Nome'
+          Width = 500
+        end>
+    end
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'FMX'
+    Left = 64
+    Top = 272
+  end
+end

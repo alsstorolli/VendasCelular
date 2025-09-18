@@ -1,0 +1,1356 @@
+object FPedido: TFPedido
+  Left = 0
+  Top = 0
+  ActiveControl = TabItem3
+  Caption = 'Pedido de Venda'
+  ClientHeight = 564
+  ClientWidth = 952
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnActivate = FormActivate
+  DesignerMasterStyle = 3
+  object tabc: TTabControl
+    Align = Client
+    FullSize = True
+    Size.Width = 952.000000000000000000
+    Size.Height = 564.000000000000000000
+    Size.PlatformDefault = False
+    TabHeight = 49.000000000000000000
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = Bottom
+    Sizes = (
+      952s
+      515s
+      952s
+      515s
+      952s
+      515s)
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = True
+      Size.Width = 317.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Pedido'
+      OnClick = TabItem1Click
+      ExplicitSize.cx = 317.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      object sg: TStringGrid
+        Align = Bottom
+        CanFocus = True
+        ClipChildren = True
+        Position.Y = 251.000000000000000000
+        Size.Width = 952.000000000000000000
+        Size.Height = 264.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claSeagreen
+        StyledSettings = [Family]
+        TabOrder = 0
+        RowHeight = 28.000000000000000000
+        RowCount = 0
+        OnSelectCell = sgSelectCell
+        Viewport.Width = 952.000000000000000000
+        Viewport.Height = 232.000000000000000000
+        object esto_codigo: TStringColumn
+          Header = 'Codigo'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 60.000000000000000000
+        end
+        object Esto_descricao: TStringColumn
+          Header = 'Descri'#231#227'o'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 260.000000000000000000
+        end
+        object esqt_qtde: TStringColumn
+          Header = 'Quantidade'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 87.000000000000000000
+        end
+        object Esto_unidade: TStringColumn
+          Header = 'Unidade'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 60.000000000000000000
+        end
+        object esqt_venda: TStringColumn
+          Header = 'Pre'#231'o'
+          HeaderSettings.TextSettings.WordWrap = False
+        end
+        object totalitem: TStringColumn
+          Header = 'Total'
+          HeaderSettings.TextSettings.WordWrap = False
+        end
+        object percdesconto: TStringColumn
+          Header = '% Desconto'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 80.000000000000000000
+        end
+        object dataproducao: TStringColumn
+          Header = 'Produ'#231#227'o'
+          HeaderSettings.TextSettings.WordWrap = False
+        end
+      end
+      object EdCodcli: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 7
+        KeyboardType = NumberPad
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Position.X = 4.000000000000000000
+        Position.Y = 53.000000000000000000
+        Size.Width = 70.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Cliente'
+        StyledSettings = [Family, FontColor]
+      end
+      object EdNome: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 8
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Position.X = 86.000000000000000000
+        Position.Y = 53.000000000000000000
+        Enabled = False
+        Size.Width = 239.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Nome'
+        StyledSettings = [Family, FontColor]
+      end
+      object sbclientes: TSpeedButton
+        IconTintColor = claSeagreen
+        Position.X = 326.000000000000000000
+        Position.Y = 41.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'searchtoolbutton'
+        Text = 'Clientes'
+        TextSettings.Trimming = None
+        OnClick = sbclientesClick
+      end
+      object Edcodpro: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 2
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Position.X = 3.000000000000000000
+        Position.Y = 97.000000000000000000
+        Size.Width = 83.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Produto'
+        StyledSettings = [Family, FontColor]
+        OnExit = EdcodproExit
+      end
+      object Eddescricao: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 6
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Position.X = 87.000000000000000000
+        Position.Y = 98.000000000000000000
+        Enabled = False
+        Size.Width = 239.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Descri'#231#227'o'
+        StyledSettings = [Family, FontColor]
+      end
+      object sbprodutos: TSpeedButton
+        IconTintColor = claSeagreen
+        Position.X = 327.000000000000000000
+        Position.Y = 85.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'searchtoolbutton'
+        Text = 'Clientes'
+        TextSettings.Trimming = None
+        OnClick = sbprodutosClick
+      end
+      object label3: TLabel
+        StyledSettings = [Family]
+        Position.X = 102.000000000000000000
+        Position.Y = 314.000000000000000000
+        Size.Width = 126.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 22.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claGreen
+        TextSettings.Trimming = None
+        Text = 'Valor Pedido'
+        TabOrder = 11
+      end
+      object sbconfirma: TSpeedButton
+        StyledSettings = [Family]
+        Hint = 'Confirma inclus'#227'o do item no pedido'
+        ModalResult = 1
+        Position.X = 260.000000000000000000
+        Position.Y = 125.000000000000000000
+        Size.Width = 95.000000000000000000
+        Size.Height = 37.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Confirma item'
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = claRoyalblue
+        TextSettings.FontColorForState.Pressed = claTeal
+        TextSettings.HorzAlign = Leading
+        TextSettings.Trimming = None
+        OnClick = sbconfirmaClick
+      end
+      object Edportador: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 14
+        Position.X = 6.000000000000000000
+        Position.Y = 170.000000000000000000
+        Size.Width = 53.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object labelportador: TLabel
+        Position.X = 475.000000000000000000
+        Position.Y = 68.000000000000000000
+        Size.Width = 127.000000000000000000
+        Size.Height = 31.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        TabOrder = 15
+      end
+      object sbportador: TSpeedButton
+        IconTintColor = claSeagreen
+        Position.X = 141.000000000000000000
+        Position.Y = 165.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'searchtoolbutton'
+        TextSettings.Trimming = None
+        OnClick = sbportadorClick
+      end
+      object labelcondicao: TLabel
+        Position.X = 526.000000000000000000
+        Position.Y = 122.000000000000000000
+        Size.Width = 117.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        TabOrder = 17
+      end
+      object sbcondicao: TSpeedButton
+        IconTintColor = claSeagreen
+        Position.X = 325.000000000000000000
+        Position.Y = 165.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'searchtoolbutton'
+        TextSettings.Trimming = None
+        OnClick = sbcondicaoClick
+      end
+      object Edcondicao: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 13
+        Position.X = 189.000000000000000000
+        Position.Y = 170.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object bgravar: TCornerButton
+        StyledSettings = [Family]
+        Position.X = 154.000000000000000000
+        Position.Y = 245.000000000000000000
+        Sides = [Top, Left, Bottom, Right]
+        Size.Width = 129.000000000000000000
+        Size.Height = 35.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 20
+        Text = 'Grava Pedido'
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claRed
+        TextSettings.Trimming = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = bgravarClick
+      end
+      object bapagaitem: TCornerButton
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 290.000000000000000000
+        Position.Y = 243.000000000000000000
+        Sides = [Top, Left, Bottom, Right]
+        Size.Width = 65.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 21
+        Text = 'Apagar'
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Trimming = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = bapagaitemClick
+      end
+      object EdQtde: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        OnTap = EdQtdeTap
+        TabOrder = 22
+        KeyboardType = NumbersAndPunctuation
+        Position.X = 7.000000000000000000
+        Position.Y = 130.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Quantidade'
+      end
+      object EdUnitario: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 25
+        KeyboardType = NumbersAndPunctuation
+        Position.X = 191.000000000000000000
+        Position.Y = 129.000000000000000000
+        Size.Width = 65.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Pre'#231'o'
+      end
+      object ToolBar1: TToolBar
+        Size.Width = 952.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 26
+        TintColor = claSeagreen
+        object labelversao: TLabel
+          StyledSettings = [Family, Size, Style]
+          Position.X = 6.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 435.000000000000000000
+          Size.Height = 36.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = claSnow
+          TextSettings.Trimming = None
+          Text = 'Vendas Sac Vers'#227'o 2.1 - Celular'
+        end
+      end
+      object CornerButton1: TCornerButton
+        StyledSettings = [Family]
+        Position.X = 4.000000000000000000
+        Position.Y = 243.000000000000000000
+        Sides = [Top, Left, Bottom, Right]
+        Size.Width = 142.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 19
+        Text = 'Ultimos Pedidos'
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claRoyalblue
+        TextSettings.Trimming = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = CornerButton1Click
+      end
+      object Label1: TLabel
+        StyledSettings = [Family, FontColor]
+        Position.X = 537.000000000000000000
+        Position.Y = 158.000000000000000000
+        Size.Width = 127.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 22.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.Trimming = None
+        Text = 'INCLUS'#195'O'
+        TabOrder = 27
+      end
+      object rbvenda: TRadioButton
+        IsChecked = True
+        Position.X = 5.000000000000000000
+        Position.Y = 287.000000000000000000
+        Size.Width = 76.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 30
+        Text = 'Venda'
+      end
+      object rbbonificacao: TRadioButton
+        Position.X = 78.000000000000000000
+        Position.Y = 288.000000000000000000
+        Size.Width = 114.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 29
+        Text = 'Bonifica'#231#227'o'
+      end
+      object rbcomodato: TRadioButton
+        Position.X = 192.000000000000000000
+        Position.Y = 287.000000000000000000
+        Size.Width = 107.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 28
+        Text = 'Comodato'
+      end
+      object EdDescricaoPortador: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 5
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Position.X = 50.000000000000000000
+        Position.Y = 170.000000000000000000
+        Enabled = False
+        Size.Width = 93.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Portador'
+        StyledSettings = [Family, FontColor]
+      end
+      object EdDescriaofpagto: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 4
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Position.X = 232.000000000000000000
+        Position.Y = 170.000000000000000000
+        Enabled = False
+        Size.Width = 93.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Condi'#231#227'o'
+        StyledSettings = [Family, FontColor]
+      end
+      object EdDesconto: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 24
+        KeyboardType = NumbersAndPunctuation
+        Position.X = 118.000000000000000000
+        Position.Y = 129.000000000000000000
+        Size.Width = 66.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = '% Desc.'
+      end
+      object EdDescontomaximo: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 23
+        KeyboardType = NumbersAndPunctuation
+        Position.X = 122.000000000000000000
+        Position.Y = 210.000000000000000000
+        Enabled = False
+        Size.Width = 65.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = '% Desc.'
+        Visible = False
+      end
+      object EdValorPedido: TLabel
+        StyledSettings = [Family]
+        Position.X = 236.000000000000000000
+        Position.Y = 310.000000000000000000
+        Size.Width = 121.000000000000000000
+        Size.Height = 46.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 23.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claGreen
+        TextSettings.Trimming = None
+        TabOrder = 31
+      end
+      object AniIndicator2: TAniIndicator
+        Position.X = 249.000000000000000000
+        Position.Y = 208.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        Visible = False
+      end
+      object Memo1: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Position.X = 10.000000000000000000
+        Position.Y = 211.000000000000000000
+        Size.Width = 343.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 33
+        Visible = False
+        Viewport.Width = 335.000000000000000000
+        Viewport.Height = 24.000000000000000000
+      end
+      object EdUnidade: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 34
+        Position.X = 8.000000000000000000
+        Position.Y = 152.000000000000000000
+        Enabled = False
+        Size.Width = 57.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        Visible = False
+      end
+      object Pvalores: TPanel
+        Position.X = 269.000000000000000000
+        Position.Y = 206.000000000000000000
+        Size.Width = 182.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 35
+        object EdInicial: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 0
+          Position.X = 119.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 63.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Inicial'
+          OnKeyDown = EdInicialKeyDown
+        end
+        object bpedevalores: TButton
+          Position.X = 258.000000000000000000
+          Position.Y = -2.000000000000000000
+          Size.Width = 65.000000000000000000
+          Size.Height = 37.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Text = 'Fechar'
+          TextSettings.Trimming = None
+          OnClick = bpedevaloresClick
+        end
+        object EdFinal: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 1
+          Position.X = 190.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 68.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Final'
+          OnKeyDown = EdInicialKeyDown
+        end
+      end
+      object EdDtproducao: TDateEdit
+        Date = 45915.000000000000000000
+        TodayDefault = True
+        Hint = 'Data da produ'#231#227'o'
+        Position.X = 7.000000000000000000
+        Position.Y = 210.000000000000000000
+        Size.Width = 127.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+        TabOrder = 3
+        TextSettings.Font.Size = 20.000000000000000000
+      end
+      object Edpedidocli: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 1
+        MaxLength = 15
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Position.X = 154.000000000000000000
+        Position.Y = 211.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Pedido'
+        StyledSettings = [Family, FontColor]
+      end
+    end
+    object TabItem3: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = False
+      Size.Width = 317.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Lista Pedidos'
+      OnClick = TabItem3Click
+      ExplicitSize.cx = 317.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      object sgpedidosd: TStringGrid
+        Align = Bottom
+        CanFocus = True
+        ClipChildren = True
+        Position.Y = 291.000000000000000000
+        Size.Width = 952.000000000000000000
+        Size.Height = 224.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 18.000000000000000000
+        StyledSettings = [Family, Style, FontColor]
+        TabOrder = 0
+        RowHeight = 28.000000000000000000
+        RowCount = 0
+        Viewport.Width = 952.000000000000000000
+        Viewport.Height = 192.000000000000000000
+        object StringColumn7: TStringColumn
+          Header = 'Codigo'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 60.000000000000000000
+        end
+        object StringColumn8: TStringColumn
+          Header = 'Descri'#231#227'o'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 200.000000000000000000
+        end
+        object StringColumn9: TStringColumn
+          Header = 'Unidade'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 60.000000000000000000
+        end
+        object StringColumn10: TStringColumn
+          Header = 'Quantidade'
+          HeaderSettings.TextSettings.WordWrap = False
+        end
+        object StringColumn11: TStringColumn
+          Header = 'Pre'#231'o'
+          HeaderSettings.TextSettings.WordWrap = False
+        end
+        object StringColumn12: TStringColumn
+          Header = 'Total'
+          HeaderSettings.TextSettings.WordWrap = False
+        end
+        object Dtfabricacao: TStringColumn
+          Header = 'Fabrica'#231#227'o'
+          HeaderSettings.TextSettings.WordWrap = False
+        end
+      end
+      object EdData: TDateEdit
+        Date = 45915.000000000000000000
+        TodayDefault = True
+        Position.X = 12.000000000000000000
+        Position.Y = 263.000000000000000000
+        Size.Width = 153.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+        TabOrder = 2
+        TextSettings.Font.Size = 20.000000000000000000
+      end
+      object batualiza: TCornerButton
+        StyledSettings = [Family, Style]
+        Position.X = 3.000000000000000000
+        Position.Y = 194.000000000000000000
+        Sides = [Top, Left, Bottom, Right]
+        Size.Width = 81.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Text = 'Atualiza'
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.FontColor = claSeagreen
+        TextSettings.Trimming = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = batualizaClick
+      end
+      object benviapedidos: TCornerButton
+        StyledSettings = [Family]
+        Position.X = 197.000000000000000000
+        Position.Y = 194.000000000000000000
+        Sides = [Top, Left, Bottom, Right]
+        Size.Width = 94.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Text = 'Envia Ped.'
+        TextSettings.Font.Size = 17.000000000000000000
+        TextSettings.Font.StyleExt = {00040000000200000004000000}
+        TextSettings.FontColor = claRoyalblue
+        TextSettings.Trimming = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = benviapedidosClick
+      end
+      object Edtotalpedidos: TNumberBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 10
+        Cursor = crIBeam
+        Max = 10000.000000000000000000
+        ValueType = Float
+        KeyboardType = NumbersAndPunctuation
+        TextSettings.Font.Size = 22.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claMediumblue
+        TextSettings.HorzAlign = Trailing
+        Position.X = 241.000000000000000000
+        Position.Y = 246.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family]
+      end
+      object sgpedidos: TStringGrid
+        CanFocus = True
+        ClipChildren = True
+        ClipParent = True
+        Position.X = 5.000000000000000000
+        Position.Y = 9.000000000000000000
+        Size.Width = 445.000000000000000000
+        Size.Height = 185.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.FontColor = claRoyalblue
+        StyledSettings = [Family, Style]
+        TabOrder = 11
+        RowHeight = 41.000000000000000000
+        Options = [ColumnResize, ColumnMove, ColLines, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+        OnSelectCell = sgpedidosSelectCell
+        Viewport.Width = 440.000000000000000000
+        Viewport.Height = 153.000000000000000000
+        object Numero: TStringColumn
+          Header = 'Numero'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 34.000000000000000000
+        end
+        object Cliente: TStringColumn
+          Header = 'Cliente'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 150.000000000000000000
+        end
+        object Data: TStringColumn
+          Header = 'Data'
+          HeaderSettings.TextSettings.WordWrap = False
+        end
+        object Valor: TStringColumn
+          Header = 'Valor'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 122.000000000000000000
+        end
+      end
+      object cbalterapedido: TCornerButton
+        StyledSettings = [Family, Style]
+        Position.X = 82.000000000000000000
+        Position.Y = 194.000000000000000000
+        Sides = [Top, Left, Bottom, Right]
+        Size.Width = 116.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Text = 'Altera Pedido'
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.FontColor = claSeagreen
+        TextSettings.Trimming = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = cbalterapedidoClick
+      end
+      object EdNumPedido: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 12
+        Text = 'Pedido'
+        Position.X = 616.000000000000000000
+        Position.Y = 184.000000000000000000
+        Enabled = False
+        Visible = False
+      end
+      object bgerapdf: TCornerButton
+        StyledSettings = [Family]
+        Position.X = 290.000000000000000000
+        Position.Y = 194.000000000000000000
+        Sides = [Top, Left, Bottom, Right]
+        Size.Width = 51.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Text = 'PDF'
+        TextSettings.Font.Size = 17.000000000000000000
+        TextSettings.Font.StyleExt = {00040000000200000004000000}
+        TextSettings.FontColor = claRoyalblue
+        TextSettings.Trimming = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = bgerapdfClick
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = False
+      Size.Width = 318.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Op'#231#245'es'
+      OnClick = TabItem2Click
+      ExplicitSize.cx = 316.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      object Panel1: TPanel
+        Align = Top
+        Size.Width = 952.000000000000000000
+        Size.Height = 78.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 14
+        object Edenderecoftp: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 0
+          Text = 'storollicia.duckdns.org'
+          Position.X = 183.000000000000000000
+          Position.Y = 8.000000000000000000
+          Size.Width = 210.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Endere'#231'o FTP'
+        end
+        object Edporta: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 3
+          Text = '9145'
+          Position.X = 285.000000000000000000
+          Position.Y = 162.000000000000000000
+          Size.Width = 81.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Porta'
+        end
+        object cb: TCheckBox
+          Position.X = 23.000000000000000000
+          Position.Y = 12.000000000000000000
+          Size.Width = 149.000000000000000000
+          Size.Height = 27.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          Text = 'Usar Ftp Local'
+          OnClick = cbClick
+        end
+        object lmens: TLabel
+          StyledSettings = [Family, Style]
+          Position.X = 8.000000000000000000
+          Position.Y = 482.000000000000000000
+          Size.Width = 364.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 15.000000000000000000
+          TextSettings.FontColor = claChocolate
+          TextSettings.Trimming = None
+        end
+        object Edusuarioftp: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 2
+          Text = 'appsac'
+          Position.X = 8.000000000000000000
+          Position.Y = 41.000000000000000000
+          Size.Width = 154.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Usuario FTp'
+        end
+        object Edsenhaftp: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 1
+          Text = 'clientes'
+          Position.X = 224.000000000000000000
+          Position.Y = 41.000000000000000000
+          Size.Width = 123.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'senha'
+        end
+      end
+      object sbcriabanco: TSpeedButton
+        StyledSettings = [Family]
+        Position.X = 9.000000000000000000
+        Position.Y = 423.000000000000000000
+        Size.Width = 171.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'listitemdeletebutton'
+        Text = 'Cria Banco de Dados'
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claTomato
+        TextSettings.Trimming = None
+        OnClick = sbcriabancoClick
+      end
+      object sbportadores: TSpeedButton
+        Enabled = False
+        StyledSettings = [Family, Style]
+        ModalResult = 1
+        Position.X = 5.000000000000000000
+        Position.Y = 201.000000000000000000
+        Size.Width = 168.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Portadores ->'
+        TextSettings.Font.Size = 26.000000000000000000
+        TextSettings.FontColor = claSeagreen
+        TextSettings.HorzAlign = Leading
+        TextSettings.Trimming = None
+        OnClick = sbportadoresClick
+      end
+      object sblimpapedidos: TSpeedButton
+        StyledSettings = [Family, Style, FontColor]
+        ModalResult = 1
+        Position.X = 57.000000000000000000
+        Position.Y = 445.000000000000000000
+        Size.Width = 223.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Apaga Pedidos'
+        TextSettings.Font.Size = 30.000000000000000000
+        TextSettings.Trimming = None
+        OnClick = sblimpapedidosClick
+      end
+      object Edatedata: TDateEdit
+        Date = 42126.000000000000000000
+        Position.X = 114.000000000000000000
+        Position.Y = 510.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 77
+      end
+      object EdPasta01ftp: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 13
+        Text = 'Sac??'
+        Position.X = 284.000000000000000000
+        Position.Y = 193.000000000000000000
+        Size.Width = 197.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Pasta 01 FTP'
+      end
+      object EdPasta02ftp: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 7
+        Text = 'Pedidos'
+        Position.X = 282.000000000000000000
+        Position.Y = 227.000000000000000000
+        Size.Width = 210.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Pasta 02 FTP'
+      end
+      object spsalvaconfig: TSpeedButton
+        StyledSettings = [Family, Size, Style]
+        Position.X = 9.000000000000000000
+        Position.Y = 314.000000000000000000
+        Size.Width = 170.000000000000000000
+        Size.Height = 74.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Salva Configura'#231#227'o'
+        TextSettings.FontColor = claRoyalblue
+        TextSettings.Trimming = None
+        OnClick = spsalvaconfigClick
+      end
+      object sbcriaportadores: TSpeedButton
+        StyledSettings = [Family]
+        Position.X = 205.000000000000000000
+        Position.Y = 313.000000000000000000
+        Size.Width = 158.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Cria Portadores'
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claSeagreen
+        TextSettings.Trimming = None
+        OnClick = sbcriaportadoresClick
+      end
+      object sbimpclientes: TSpeedButton
+        Enabled = False
+        StyledSettings = [Family, Style]
+        ModalResult = 1
+        Position.X = 5.000000000000000000
+        Position.Y = 167.000000000000000000
+        Size.Width = 168.000000000000000000
+        Size.Height = 34.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Clientes ->'
+        TextSettings.Font.Size = 26.000000000000000000
+        TextSettings.FontColor = claSeagreen
+        TextSettings.HorzAlign = Leading
+        TextSettings.Trimming = None
+        OnClick = sbimpclientesClick
+      end
+      object sbcriaprodutos: TSpeedButton
+        StyledSettings = [Family]
+        Position.X = 206.000000000000000000
+        Position.Y = 352.000000000000000000
+        Size.Width = 158.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Cria Produtos'
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claSeagreen
+        TextSettings.Trimming = None
+        OnClick = sbcriaprodutosClick
+      end
+      object sbcriaclientes: TSpeedButton
+        StyledSettings = [Family]
+        Position.X = 205.000000000000000000
+        Position.Y = 389.000000000000000000
+        Size.Width = 158.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Cria Clientes'
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claSeagreen
+        TextSettings.Trimming = None
+        OnClick = sbcriaclientesClick
+      end
+      object sbcriaconfig: TSpeedButton
+        StyledSettings = [Family]
+        Position.X = 205.000000000000000000
+        Position.Y = 422.000000000000000000
+        Size.Width = 83.000000000000000000
+        Size.Height = 31.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Cria Config'
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claSeagreen
+        TextSettings.Trimming = None
+        OnClick = sbcriaconfigClick
+      end
+      object Edrepr_codigo: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 6
+        Position.X = 9.000000000000000000
+        Position.Y = 74.000000000000000000
+        Hint = 'Codigo do vendedor'
+        Size.Width = 100.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Vendedor'
+      end
+      object SpeedButton1: TSpeedButton
+        StyledSettings = [Family, Style]
+        Position.X = -556.000000000000000000
+        Position.Y = 130.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Importa Produtos'
+        TextSettings.Font.Size = 30.000000000000000000
+        TextSettings.FontColor = claSeagreen
+        TextSettings.Trimming = None
+        OnClick = sbimportaprodutoClick
+      end
+      object SpeedButton2: TSpeedButton
+        StyledSettings = [Family, Style]
+        Position.X = -588.000000000000000000
+        Position.Y = 130.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Importa Produtos'
+        TextSettings.Font.Size = 30.000000000000000000
+        TextSettings.FontColor = claSeagreen
+        TextSettings.Trimming = None
+        OnClick = sbimportaprodutoClick
+      end
+      object sbimportaproduto: TSpeedButton
+        Enabled = False
+        StyledSettings = [Family, Style]
+        ModalResult = 1
+        Position.X = 5.000000000000000000
+        Position.Y = 272.000000000000000000
+        Size.Width = 168.000000000000000000
+        Size.Height = 34.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Produtos ->'
+        TextSettings.Font.Size = 26.000000000000000000
+        TextSettings.FontColor = claSeagreen
+        TextSettings.HorzAlign = Leading
+        TextSettings.Trimming = None
+        OnClick = sbimportaprodutoClick
+      end
+      object Edenderecoftplocal: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 0
+        Text = '192.168.10.110'
+        Position.X = 199.000000000000000000
+        Position.Y = 70.000000000000000000
+        Size.Width = 143.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Endere'#231'o FTP Local'
+      end
+      object Edsupe_codigo: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 4
+        Position.X = 9.000000000000000000
+        Position.Y = 105.000000000000000000
+        Hint = 'Codigo do supervisor'
+        Size.Width = 100.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Supervisor'
+      end
+      object EdSenha: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 1
+        KeyboardType = NumberPad
+        MaxLength = 10
+        Position.X = 197.000000000000000000
+        Position.Y = 104.000000000000000000
+        Hint = 'Senha'
+        Size.Width = 100.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Senha'
+      end
+      object EdOnLine: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 5
+        MaxLength = 1
+        Position.X = 283.000000000000000000
+        Position.Y = 260.000000000000000000
+        Size.Width = 81.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Online'
+      end
+      object SpeedButton3: TSpeedButton
+        Enabled = False
+        StyledSettings = [Family, Size, Style]
+        Position.X = 173.000000000000000000
+        Position.Y = 161.000000000000000000
+        Size.Width = 70.000000000000000000
+        Size.Height = 38.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Importa'
+        TextSettings.FontColor = claDarkgreen
+        TextSettings.Trimming = None
+        Visible = False
+        OnClick = SpeedButton3Click
+      end
+      object sbexeportadores: TSpeedButton
+        Enabled = False
+        StyledSettings = [Family, Size, Style]
+        Position.X = 173.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 70.000000000000000000
+        Size.Height = 38.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Importa'
+        TextSettings.FontColor = claDarkgreen
+        TextSettings.Trimming = None
+        Visible = False
+        OnClick = sbexeportadoresClick
+      end
+      object sbexeprodutos: TSpeedButton
+        Enabled = False
+        StyledSettings = [Family, Size, Style]
+        Position.X = 173.000000000000000000
+        Position.Y = 273.000000000000000000
+        Size.Width = 70.000000000000000000
+        Size.Height = 38.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Importa'
+        TextSettings.FontColor = claDarkgreen
+        TextSettings.Trimming = None
+        Visible = False
+        OnClick = sbexeprodutosClick
+      end
+      object AniIndicator1: TAniIndicator
+        Position.X = 272.000000000000000000
+        Position.Y = 472.000000000000000000
+        Size.Width = 46.000000000000000000
+        Size.Height = 46.000000000000000000
+        Size.PlatformDefault = False
+        Style = Circular
+      end
+      object sbestrtura: TSpeedButton
+        StyledSettings = [Family]
+        Position.X = 288.000000000000000000
+        Position.Y = 422.000000000000000000
+        Size.Width = 76.000000000000000000
+        Size.Height = 31.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Estrutura'
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claSeagreen
+        TextSettings.Trimming = None
+        OnClick = sbestrturaClick
+      end
+      object EdClientesPedidos: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 2
+        KeyboardType = NumbersAndPunctuation
+        MaxLength = 60
+        Position.X = 9.000000000000000000
+        Position.Y = 132.000000000000000000
+        Hint = 'Clientes que exigem nro do pedido no xml'
+        Size.Width = 242.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Clientes com pedido no xml'
+      end
+      object sbimpportadores: TSpeedButton
+        StyledSettings = [Size, Style]
+        Position.X = 230.000000000000000000
+        Position.Y = 201.000000000000000000
+        Size.Width = 46.000000000000000000
+        Size.Height = 35.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Imp'
+        TextSettings.Font.Family = 'Comic Sans MS'
+        TextSettings.FontColor = claDarkgreen
+        TextSettings.Trimming = None
+        OnClick = sbimpportadoresClick
+      end
+      object sbimpclientesapi: TSpeedButton
+        StyledSettings = [Size, Style]
+        Position.X = 230.000000000000000000
+        Position.Y = 167.000000000000000000
+        Size.Width = 46.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Imp'
+        TextSettings.Font.Family = 'Comic Sans MS'
+        TextSettings.FontColor = claDarkgreen
+        TextSettings.Trimming = None
+        OnClick = sbimpclientesapiClick
+      end
+      object sbimpprodutosapi: TSpeedButton
+        StyledSettings = [Size, Style]
+        Position.X = 230.000000000000000000
+        Position.Y = 275.000000000000000000
+        Size.Width = 46.000000000000000000
+        Size.Height = 31.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Imp'
+        TextSettings.Font.Family = 'Comic Sans MS'
+        TextSettings.FontColor = claDarkgreen
+        TextSettings.Trimming = None
+        OnClick = sbimpprodutosapiClick
+      end
+      object sbtextocondicao: TSpeedButton
+        Enabled = False
+        StyledSettings = [Family, Style]
+        ModalResult = 1
+        Position.X = 5.000000000000000000
+        Position.Y = 236.000000000000000000
+        Size.Width = 168.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Cond. Pgto ->'
+        TextSettings.Font.Size = 26.000000000000000000
+        TextSettings.FontColor = claSeagreen
+        TextSettings.HorzAlign = Leading
+        TextSettings.Trimming = None
+        OnClick = sbportadoresClick
+      end
+      object sbimportacondicao: TSpeedButton
+        StyledSettings = [Size, Style]
+        Position.X = 230.000000000000000000
+        Position.Y = 236.000000000000000000
+        Size.Width = 46.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Imp'
+        TextSettings.Font.Family = 'Comic Sans MS'
+        TextSettings.FontColor = claDarkgreen
+        TextSettings.Trimming = None
+        OnClick = sbimportacondicaoClick
+      end
+      object EdPortaFtp: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 3
+        Text = '60500'
+        Position.X = 288.000000000000000000
+        Position.Y = 133.000000000000000000
+        Size.Width = 81.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = ' Porta Ftp'
+      end
+    end
+    object PathAnimation1: TPathAnimation
+      Duration = 0.200000002980232200
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    ScopeMappings = <>
+    Left = 456
+    Top = 136
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 508
+    Top = 125
+  end
+  object ftp: TIdFTP
+    OnWork = ftpWork
+    OnWorkBegin = ftpWorkBegin
+    OnWorkEnd = ftpWorkEnd
+    Passive = True
+    ConnectTimeout = 0
+    TransferType = ftBinary
+    Port = 60500
+    NATKeepAlive.UseKeepAlive = False
+    NATKeepAlive.IdleTimeMS = 0
+    NATKeepAlive.IntervalMS = 0
+    ProxySettings.ProxyType = fpcmNone
+    ProxySettings.Port = 0
+    Left = 384
+    Top = 120
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'UTF-8, *;q=0.8'
+    AcceptEncoding = 'identity'
+    AutoCreateParams = False
+    BaseURL = 'http://localhost:8080/GetListaAlunos'
+    Params = <>
+    SynchronizedEvents = False
+    Left = 456
+    Top = 31
+  end
+  object RESTResponse1: TRESTResponse
+    Left = 480
+    Top = 71
+  end
+  object RESTRequest1: TRESTRequest
+    Client = RESTClient1
+    Params = <>
+    Response = RESTResponse1
+    SynchronizedEvents = False
+    Left = 584
+    Top = 183
+  end
+end

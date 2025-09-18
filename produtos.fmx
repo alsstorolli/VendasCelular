@@ -1,0 +1,106 @@
+object Fprodutos: TFprodutos
+  Left = 0
+  Top = 0
+  Caption = 'Produtos'
+  ClientHeight = 480
+  ClientWidth = 740
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnActivate = FormActivate
+  DesignerMasterStyle = 3
+  object sg: TStringGrid
+    Align = Bottom
+    CanFocus = True
+    ClipChildren = True
+    Position.Y = 115.000000000000000000
+    Size.Width = 740.000000000000000000
+    Size.Height = 365.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    RowHeight = 41.000000000000000000
+    RowCount = 0
+    Options = [ColumnResize, ColumnMove, ColLines, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+    OnSelectCell = sgSelectCell
+    OnSelChanged = sgSelChanged
+    Viewport.Width = 740.000000000000000000
+    Viewport.Height = 333.000000000000000000
+  end
+  object EdDescricao: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 1
+    Position.X = 19.000000000000000000
+    Position.Y = 62.000000000000000000
+    Size.Width = 236.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Descri'#231#227'o'
+  end
+  object bpesquisa: TSpeedButton
+    Position.X = 267.000000000000000000
+    Position.Y = 48.000000000000000000
+    Size.Width = 48.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'searchtoolbutton'
+    Text = 'bpesquisa'
+    OnClick = bpesquisaClick
+  end
+  object ToolBar1: TToolBar
+    Size.Width = 740.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    object sb: TSpeedButton
+      Position.X = 360.000000000000000000
+      Position.Y = 49.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'donetoolbutton'
+      Text = 'OK'
+      OnClick = sbClick
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = dm.QProdutos
+    ScopeMappings = <>
+    Left = 168
+    Top = 224
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 196
+    Top = 325
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = sg
+      Columns = <
+        item
+          MemberName = 'esto_codigo'
+          Header = 'Codigo'
+        end
+        item
+          MemberName = 'esto_descricao'
+          Header = 'Descri'#231#227'o'
+          Width = 500
+        end
+        item
+          MemberName = 'esto_unidade'
+          Header = 'Unidade'
+        end
+        item
+          MemberName = 'precovenda'
+          Header = 'Pre'#231'o Venda'
+          Width = 150
+        end>
+    end
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'FMX'
+    Left = 64
+    Top = 272
+  end
+end

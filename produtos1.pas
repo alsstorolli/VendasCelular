@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, System.Rtti,
   FMX.Grid, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Edit, FMX.Layouts,
   FMX.Grid.Style, FMX.ScrollBox, Math, FMX.Objects, FMX.ExtCtrls,
-   System.IOUtils, System.StartupCopy, Soap.EncdDecd;
+   System.IOUtils, System.StartupCopy, Soap.EncdDecd,
+   System.Generics.Collections;
 
 type
   TFProdutos1 = class(TForm)
@@ -27,6 +28,7 @@ type
     AniIndicator2: TAniIndicator;
     lmens: TLabel;
     AniIndicator1: TAniIndicator;
+    AniIndicator3: TAniIndicator;
     procedure bpesquisaClick(Sender: TObject);
     procedure sbClick(Sender: TObject);
     procedure sgSelChanged(Sender: TObject);
@@ -54,7 +56,7 @@ type
 
   end;
 
-  type TProdutos=record
+  type TProdutos=class
      esto_codigo,esto_descricao,esto_unidade:string;
      esto_venda,esto_desconto               :currency;
      esto_imagem : TBitMap;
@@ -66,9 +68,9 @@ type
   var
   FProdutos1   : TFProdutos1;
   xcol,xlin    :integer;
-  PProdutos    :^TProdutos;
-  ListaProdutos:TList;
-  str          : TMemoryStream;
+  PProdutos    :TProdutos;
+  ListaProdutos:TObjectList<TProdutos>;
+//  str          : TMemoryStream;
 //  str          : TStringStream;
   caminho,
   arquivo      : string;
@@ -82,6 +84,8 @@ uses datam,pedido,FMX.VirtualKeyboard, FMX.Platform;
 
 
 {$R *.fmx}
+//{$R *.LgXhdpiPh.fmx ANDROID}
+//{$R *.NmXhdpiPh.fmx ANDROID}
 
 { TFProdutos1 }
 
@@ -213,7 +217,7 @@ begin
   xcol:=-1;xlin:=-1;
   sg.RowCount:=0;
   l:=0;
-  str := TStringStream.create;
+//  str := TStringStream.create;
 
   for p := 0 to ListaProdutos.Count-1  do begin
 
@@ -281,108 +285,74 @@ begin
 
   if not dm.QProdutos.Active then begin
 
-//   showMessage('Carregando produtos...');
+    TThread.CreateAnonymousThread(procedure
+    begin
+          AniIndicator2.Visible := true;
+          AniIndicator2.Enabled := true;
+          Mensagem('Aguarde, carregando produtos...');
 
-   dm.QProdutos.Close;
-   dm.QProdutos.Sql.Clear;
-   dm.QProdutos.SQL.Add('select esto_desconto,esto_imagem,esto_codigo,esto_descricao,esto_unidade,(select esqt_vendavis from estoqueqtde where esto_codigo=esqt_esto_codigo) as precovenda from estoque'+
-                        ' order by esto_descricao' );
+//   dm.QProdutos.Close;
+       dm.QProdutos.Sql.Clear;
+       dm.QProdutos.SQL.Add('select esto_desconto,esto_imagem,esto_codigo,esto_descricao,esto_unidade,'+
+                            '(select esqt_vendavis from estoqueqtde where esto_codigo=esqt_esto_codigo) as precovenda from estoque'+
+                            ' order by esto_descricao' );
 
-//   Mensagem('Abrindo arquivo de produtos...');
+//       Mensagem('Abrindo arquivo de produtos...');
+       dm.QProdutos.open;
+       p:=0;
+       sg.RowCount:=0;
+       ListaProdutos:=TObjectList<TProdutos>.Create;
+//       Str := TMemoryStream.create;
+//       mensagem('Montando tela...',0);
+//       sg.BeginUpdate;
+       while not dm.QProdutos.Eof do begin
+         inc(p);
+         sg.RowCount:=p;
+    // 17.01.2021
+         sg.Cells[colcodigo,p-1]:=dm.QProdutos.FieldByName('esto_codigo').AsString;
+         sg.Cells[coldescricao,p-1]:=dm.QProdutos.FieldByName('esto_descricao').AsString;
+         sg.Cells[colunidade,p-1]:=dm.QProdutos.FieldByName('esto_unidade').AsString;
+         sg.Cells[colpreco,p-1]:=dm.QProdutos.FieldByName('precovenda').AsString;
+    // 21.06.2021
+         sg.Cells[coldesconto,p-1] := dm.QProdutos.Fieldbyname('esto_desconto').AsString;
+         PProdutos:=TProdutos.Create;
+         PProdutos.esto_codigo:=dm.QProdutos.FieldByName('esto_codigo').AsString;
+         PProdutos.esto_descricao:=dm.QProdutos.FieldByName('esto_descricao').AsString;
+         PProdutos.esto_unidade:=dm.QProdutos.FieldByName('esto_unidade').AsString;
+         PProdutos.esto_venda:=dm.QProdutos.FieldByName('precovenda').Ascurrency;
+    // 21.06.2021 - Guiber
+         PProdutos.esto_desconto := dm.QProdutos.FieldByName('esto_desconto').Ascurrency;
+         s := dm.QProdutos.FieldByName('esto_imagem').AsString;
+           if trim(s)<> '' then begin
+                PProdutos.esto_imagem := TBitMap.Create;
+    //            PProdutos.esto_imagem := TImage.Create(Owner);
+                PProdutos.esto_imagem.Assign( BitmapFromBase64( HextoString(dm.QProdutos.fieldbyname('esto_imagem').asstring) ) );
+    //            PProdutos.esto_imagem.Bitmap.Assign( BitmapFromBase64( HextoString(dm.QProdutos.fieldbyname('esto_imagem').asstring) ) );
+    //            Imagem.BitMap.Assign( PProdutos.esto_imagem );
+           end else
+                PProdutos.esto_imagem := nil;
 
-   dm.QProdutos.open;
-   p:=0;
-   sg.RowCount:=0;
-   ListaProdutos:=TList.Create;
+         //end;
+         ListaProdutos.Add(PProdutos);
+     //    mensagem('Montando tela codigo '+PProdutos.esto_codigo,0);
 
-   Str := TMemoryStream.create;
+          dm.QProdutos.Next;
 
-   mensagem('Montando tela...',0);
+        end;
 
-//   Mensagem('Lendo  produtos...');
+          TThread.Synchronize(nil, procedure
+          begin
+//                        TLoading.Hide;
+            AniIndicator2.Visible := false;
+            AniIndicator2.Enabled := false;
+//            sg.EndUpdate;
+            Mensagem(' ');
+            sg.UpdateEffects;
+          end);
 
-   while not dm.QProdutos.Eof do begin
-
-     inc(p);
-     sg.RowCount:=p;
-// 17.01.2021
-     sg.Cells[colcodigo,p-1]:=dm.QProdutos.FieldByName('esto_codigo').AsString;
-     sg.Cells[coldescricao,p-1]:=dm.QProdutos.FieldByName('esto_descricao').AsString;
-     sg.Cells[colunidade,p-1]:=dm.QProdutos.FieldByName('esto_unidade').AsString;
-     sg.Cells[colpreco,p-1]:=dm.QProdutos.FieldByName('precovenda').AsString;
-// 21.06.2021
-     sg.Cells[coldesconto,p-1] := dm.QProdutos.Fieldbyname('esto_desconto').AsString;
-     New(PProdutos);
-     PProdutos.esto_codigo:=dm.QProdutos.FieldByName('esto_codigo').AsString;
-     PProdutos.esto_descricao:=dm.QProdutos.FieldByName('esto_descricao').AsString;
-     PProdutos.esto_unidade:=dm.QProdutos.FieldByName('esto_unidade').AsString;
-     PProdutos.esto_venda:=dm.QProdutos.FieldByName('precovenda').Ascurrency;
-// 21.06.2021 - Guiber
-     PProdutos.esto_desconto := dm.QProdutos.FieldByName('esto_desconto').Ascurrency;
-// 17.01.2021
- //    Str.Clear;
- //    Str.Position:=0;
-// 1237
-
-     //if dm.QProdutos.FieldByName('esto_codigo').AsString='1084' then begin
-
-//       Str.Clear;
-//       Str.Position:=0;
-
-        s := dm.QProdutos.FieldByName('esto_imagem').AsString;
-
-//       showmessage('tamanho s ='+inttostr(length(s)) );
-//       Ss  := TStringStream.create;
-
-{
-       for i:=1 to Length( s ) do begin
-
-          if i mod 2 = 0 then begin
-             Buf[1]  :=Chr(HexToInt(s[i-1]+s[i]));
-             Buf01[1]:=(s[i-1]+s[i]);
-             Str.Write(Buf,1);
-             ss.Write(Buf01,1);
-          end;
-
-       end;
-}
-
-//       showmessage('str.Size 01='+inttostr(str.Size) );
-
-//       Str.Position:=0;
-//       ss.Position :=0;
-
-
-//       if str.Size > 1 then begin
-       if trim(s)<> '' then begin
-
-            PProdutos.esto_imagem := TBitMap.Create;
-//            PProdutos.esto_imagem := TImage.Create(Owner);
-            PProdutos.esto_imagem.Assign( BitmapFromBase64( HextoString(dm.QProdutos.fieldbyname('esto_imagem').asstring) ) );
-//            PProdutos.esto_imagem.Bitmap.Assign( BitmapFromBase64( HextoString(dm.QProdutos.fieldbyname('esto_imagem').asstring) ) );
-
-//            Imagem.BitMap.Assign( PProdutos.esto_imagem );
-
-
-       end else
-
-            PProdutos.esto_imagem := nil;
-
-     //end;
-
-     ListaProdutos.Add(PProdutos);
-
- //    mensagem('Montando tela codigo '+PProdutos.esto_codigo,0);
-
-     dm.QProdutos.Next;
-
-   end;
-///   showmessage('');
-   mensagem(' ',0);
+    end).Start;
 
   end;
-
-
 end;
 
 // 14.10.2021
@@ -390,8 +360,8 @@ procedure TFProdutos1.ExecuteX;
 ///////////////////////////////
 begin
 
-       show;
        Execute;
+       show;
 
 end;
 

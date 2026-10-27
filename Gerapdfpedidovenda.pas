@@ -50,7 +50,8 @@ var
   vw: Double;
   titulo,
   caminho,
-  Arqlogo:string;
+  Arqlogo,
+  Arquivot:string;
 
 begin
    {$IFDEF ANDROID}
@@ -59,7 +60,7 @@ begin
 
    {$ELSE}
 
-     arqlogo:=ExtractFilePath( Application.ExeName ) + 'Logo.jpg' ;
+     arqlogo:=ExtractFilePath( caminho) + '\Logo.jpg' ;
      Arquivot:=caminho+ '\mestre.txt';
 
    {$ENDIF}
@@ -140,6 +141,7 @@ begin
   caminho:=GetHomePath ;
 
   unidade:=xunidade;
+  dm.QPed.Close;
   dm.QPed.SQL.Clear;
   dm.QPed.SQL.Add('select * from movpeddet'+
         ' inner join movped on ( mped_numerodoc=mpdd_numerodoc and mped_datamvto=mpdd_datamvto )'+
@@ -239,7 +241,7 @@ begin
   arquivo:=  TPath.Combine(TPath.GetSharedDocumentsPath, nomearquivo);    // assim salva na pasta 'documents'
   pdf.SaveToFile( arquivo );
 
-  showmessage('arquivo salvo em '+arquivo);
+//  showmessage('arquivo salvo em '+arquivo);
 
 //  FVisualizapdf.Execute(arquivo);
   FVepdf.Execute(arquivo);

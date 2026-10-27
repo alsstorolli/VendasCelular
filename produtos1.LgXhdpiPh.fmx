@@ -1,0 +1,26 @@
+inherited FProdutos1_LgXhdpiPh: TFProdutos1_LgXhdpiPh
+  ClientHeight = 695
+  ClientWidth = 450
+  DesignerMasterStyle = 0
+  inherited sg: TStringGrid
+    Position.Y = 330.000000000000000000
+    Size.Width = 450.000000000000000000
+    Viewport.Width = 450.000000000000000000
+    Viewport.Height = 365.000000000000000000
+    inherited esto_imagem: TStringColumn
+      Size.Width = 30.000000000000000000
+    end
+    inherited esto_descricao: TStringColumn
+      Size.Width = 500.000000000000000000
+    end
+    inherited esto_codigo: TStringColumn
+      Size.Width = 70.000000000000000000
+    end
+    inherited esto_unidade: TStringColumn
+      Size.Width = 60.000000000000000000
+    end
+  end
+  inherited ToolBar1: TToolBar
+    Size.Width = 450.000000000000000000
+  end
+end

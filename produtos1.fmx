@@ -7,7 +7,7 @@ object FProdutos1: TFProdutos1
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  DesignerMasterStyle = 0
+  DesignerMasterStyle = 3
   object sg: TStringGrid
     Align = Bottom
     CanFocus = True
@@ -27,25 +27,31 @@ object FProdutos1: TFProdutos1
     Viewport.Height = 365.000000000000000000
     object esto_imagem: TStringColumn
       Header = 'Im.'
+      HeaderSettings.TextSettings.WordWrap = False
       Size.Width = 30.000000000000000000
     end
     object esto_descricao: TStringColumn
       Header = 'Descri'#231#227'o'
+      HeaderSettings.TextSettings.WordWrap = False
       Size.Width = 500.000000000000000000
     end
     object esto_codigo: TStringColumn
       Header = 'Codigo'
+      HeaderSettings.TextSettings.WordWrap = False
       Size.Width = 70.000000000000000000
     end
     object esto_unidade: TStringColumn
       Header = 'Unidade'
+      HeaderSettings.TextSettings.WordWrap = False
       Size.Width = 60.000000000000000000
     end
     object esto_venda: TStringColumn
       Header = 'Pre'#231'o Venda'
+      HeaderSettings.TextSettings.WordWrap = False
     end
     object esto_desconto: TStringColumn
       Header = 'Desconto'
+      HeaderSettings.TextSettings.WordWrap = False
     end
   end
   object EdDescricao: TEdit
@@ -64,11 +70,12 @@ object FProdutos1: TFProdutos1
   object bpesquisa: TSpeedButton
     Position.X = 283.000000000000000000
     Position.Y = 59.000000000000000000
-    Size.Width = 42.000000000000000000
-    Size.Height = 32.000000000000000000
+    Size.Width = 48.000000000000000000
+    Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'searchtoolbutton'
     Text = 'bpesquisa'
+    TextSettings.Trimming = None
     OnClick = bpesquisaClick
   end
   object ToolBar1: TToolBar
@@ -79,11 +86,12 @@ object FProdutos1: TFProdutos1
     object sb: TSpeedButton
       Position.X = 333.000000000000000000
       Position.Y = 58.000000000000000000
-      Size.Width = 39.000000000000000000
-      Size.Height = 31.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'donetoolbutton'
       Text = 'OK'
+      TextSettings.Trimming = None
       OnClick = sbClick
     end
     object AniIndicator2: TAniIndicator
@@ -118,10 +126,19 @@ object FProdutos1: TFProdutos1
     Size.PlatformDefault = False
     TextSettings.Font.Size = 15.000000000000000000
     TextSettings.FontColor = claChocolate
+    TextSettings.Trimming = None
     TabOrder = 8
   end
   object AniIndicator1: TAniIndicator
     Position.X = 240.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 40.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    Style = Circular
+  end
+  object AniIndicator3: TAniIndicator
+    Position.X = 333.000000000000000000
     Position.Y = 80.000000000000000000
     Size.Width = 40.000000000000000000
     Size.Height = 40.000000000000000000

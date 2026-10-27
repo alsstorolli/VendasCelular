@@ -25,7 +25,7 @@ object FClientes: TFClientes
     OnSelectCell = sgSelectCell
     OnSelChanged = sgSelChanged
     Viewport.Width = 724.000000000000000000
-    Viewport.Height = 365.000000000000000000
+    Viewport.Height = 333.000000000000000000
   end
   object EdNome: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -94,7 +94,7 @@ object FClientes: TFClientes
   object lmens: TLabel
     StyledSettings = [Family, Style]
     Position.X = 19.000000000000000000
-    Position.Y = 96.000000000000000000
+    Position.Y = 102.000000000000000000
     Size.Width = 251.000000000000000000
     Size.Height = 27.000000000000000000
     Size.PlatformDefault = False
@@ -144,35 +144,33 @@ object FClientes: TFClientes
       Columns = <
         item
           MemberName = 'clie_codigo'
-          ReadOnly = True
           Header = 'Codigo'
-          Width = 80
-          ColumnStyle = 'IntegerColumn'
           DecimalDigits = 0
-          Alignment = taCenter
         end
         item
           MemberName = 'clie_nome'
           Header = 'Nome'
-          Width = 300
           DecimalDigits = 0
         end
         item
           MemberName = 'clie_cnpjcpf'
-          Header = 'Cnpf/Cpf'
-          Width = 200
+          Header = 'CNPJ /  CPF'
           DecimalDigits = 0
         end
         item
           MemberName = 'clie_razaosocial'
           Header = 'Raz'#227'o Social'
-          Width = 300
           DecimalDigits = 0
         end
         item
           MemberName = 'clie_cidade'
           Header = 'Cidade'
-          Width = 150
+          DecimalDigits = 0
+        end
+        item
+          MemberName = 'clie_uf'
+          Header = 'UF'
+          Width = 50
           DecimalDigits = 0
         end>
     end

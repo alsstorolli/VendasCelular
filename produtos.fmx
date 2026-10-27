@@ -24,13 +24,13 @@ object Fprodutos: TFprodutos
     OnSelectCell = sgSelectCell
     OnSelChanged = sgSelChanged
     Viewport.Width = 740.000000000000000000
-    Viewport.Height = 333.000000000000000000
+    Viewport.Height = 365.000000000000000000
   end
   object EdDescricao: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     TabOrder = 1
-    Position.X = 19.000000000000000000
-    Position.Y = 62.000000000000000000
+    Position.X = 23.000000000000000000
+    Position.Y = 56.000000000000000000
     Size.Width = 236.000000000000000000
     Size.Height = 32.000000000000000000
     Size.PlatformDefault = False
@@ -44,6 +44,7 @@ object Fprodutos: TFprodutos
     Size.PlatformDefault = False
     StyleLookup = 'searchtoolbutton'
     Text = 'bpesquisa'
+    TextSettings.Trimming = None
     OnClick = bpesquisaClick
   end
   object ToolBar1: TToolBar
@@ -59,8 +60,29 @@ object Fprodutos: TFprodutos
       Size.PlatformDefault = False
       StyleLookup = 'donetoolbutton'
       Text = 'OK'
+      TextSettings.Trimming = None
       OnClick = sbClick
     end
+  end
+  object lmens: TLabel
+    StyledSettings = [Family, Style]
+    Position.X = 14.000000000000000000
+    Position.Y = 91.000000000000000000
+    Size.Width = 282.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 15.000000000000000000
+    TextSettings.FontColor = claChocolate
+    TextSettings.Trimming = None
+    TabOrder = 8
+  end
+  object AniIndicator2: TAniIndicator
+    Position.X = 240.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 40.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    Style = Circular
   end
   object BindSourceDB1: TBindSourceDB
     DataSet = dm.QProdutos
@@ -81,20 +103,27 @@ object Fprodutos: TFprodutos
         item
           MemberName = 'esto_codigo'
           Header = 'Codigo'
+          Width = 80
+          DecimalDigits = 0
         end
         item
           MemberName = 'esto_descricao'
           Header = 'Descri'#231#227'o'
-          Width = 500
+          Width = 400
         end
         item
           MemberName = 'esto_unidade'
           Header = 'Unidade'
+          Width = 50
         end
         item
           MemberName = 'precovenda'
           Header = 'Pre'#231'o Venda'
-          Width = 150
+          Width = 100
+        end
+        item
+          MemberName = 'esto_desconto'
+          Header = 'Desconto'
         end>
     end
   end

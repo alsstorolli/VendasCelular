@@ -9,11 +9,13 @@ type TClientes = class
     FClie_Razaosocial: String;
     FClie_Cnpjcpf: String;
     FClie_Cidade: String;
+    FClie_UF: String;
     procedure SetClie_Codigo(const Value: Integer);
     procedure SetClie_Nome(const Value: String);
     procedure SetClie_Razaosocial(const Value: String);
     procedure SetClie_Cidade(const Value: String);
     procedure SetClie_Cnpjcpf(const Value: String);
+    procedure SetClie_UF(const Value: String);
   public
     [FieldName('Clie_Codigo')]
     property Clie_Codigo:Integer read FClie_Codigo write SetClie_Codigo;
@@ -25,6 +27,8 @@ type TClientes = class
     property Clie_Cidade:String read FClie_Cidade write SetClie_Cidade;
     [FieldName('Clie_Cnpjcpf')]
     property Clie_Cnpjcpf:String read FClie_Cnpjcpf write SetClie_Cnpjcpf;
+    [FieldName('Clie_Uf')]
+    property Clie_Uf:String read FClie_Uf write SetClie_Uf;
 
 end;
 
@@ -56,6 +60,11 @@ end;
 procedure TClientes.SetClie_Razaosocial(const Value: String);
 begin
    FClie_Razaosocial := Value;
+end;
+
+procedure TClientes.SetClie_UF(const Value: String);
+begin
+   FClie_Uf := Value;
 end;
 
 end.

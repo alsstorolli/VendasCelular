@@ -10,8 +10,14 @@ object dm: Tdm
   DesignerMasterStyle = 0
   object conexao: TFDConnection
     Params.Strings = (
-      'Database=C:\Delphixe7Projetos\Vendas\BancodeDados\sacandroid.db'
-      'DriverID=SQLite')
+      
+        'Database=C:\ProjetosDelphi12.1\VendasCelular\Win64\Debug\sacandr' +
+        'oid.db'
+      'DriverID=SQLite'
+      'LoginPrompt=False'
+      'LockingMode=Normal'
+      'JournalMode=WAL')
+    Connected = True
     LoginPrompt = False
     BeforeConnect = conexaoBeforeConnect
     Left = 64
@@ -400,13 +406,16 @@ object dm: Tdm
       ');'
       ''
       '')
-    Left = 160
-    Top = 48
+    Left = 232
+    Top = 24
   end
   object QClientes: TFDQuery
     Connection = conexao
     SQL.Strings = (
-      'select * from clientes order by clie_nome')
+      
+        'select clie_codigo,clie_nome,clie_razaosocial,clie_uf,clie_cnpjc' +
+        'pf,clie_cidade'
+      ' from clientes order by clie_nome')
     Left = 56
     Top = 136
   end
@@ -423,7 +432,7 @@ object dm: Tdm
   object QProdutos: TFDQuery
     Connection = conexao
     SQL.Strings = (
-      'select esto_codigo,esto_descricao,esto_unidade,'
+      'select esto_codigo,esto_descricao,esto_unidade,esto_desconto,'
       '(select esqt_vendavis from estoqueqtde where esto_codigo '
       '=esqt_esto_codigo) as precovenda from estoque'
       'order by esto_descricao')
@@ -740,5 +749,10 @@ object dm: Tdm
     Connection = conexao
     Left = 272
     Top = 321
+  end
+  object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
+    VendorLib = 'C:\ProjetosDelphi12.1\VendasCelular\Win64\Debug\sqlite3.dll'
+    Left = 136
+    Top = 16
   end
 end

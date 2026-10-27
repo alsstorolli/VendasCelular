@@ -9,7 +9,7 @@ uses
   Data.Bind.EngExt, Fmx.Bind.DBEngExt, Fmx.Bind.Grid, System.Bindings.Outputs,
   Fmx.Bind.Editors, Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope,
   FireDAC.UI.Intf, FireDAC.FMXUI.Wait, FireDAC.Stan.Intf, FireDAC.Comp.UI,
-  FMX.Grid.Style, FMX.ScrollBox;
+  FMX.Grid.Style, FMX.ScrollBox,System.Generics.Collections;
 
 type
   TFClientes = class(TForm)
@@ -18,7 +18,6 @@ type
     bpesquisa: TSpeedButton;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
-    LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     EdCidade: TEdit;
     sbcidade: TSpeedButton;
@@ -27,6 +26,7 @@ type
     lmens: TLabel;
     Edcnpjcpf: TEdit;
     sbcnpjcpf: TSpeedButton;
+    LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
     procedure bpesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -60,6 +60,7 @@ implementation
 uses datam,pedido,FMX.VirtualKeyboard, FMX.Platform, cadcliente;
 
 {$R *.fmx}
+{$R *.LgXhdpiPh.fmx ANDROID}
 
 // 23.06.2021
 procedure TFClientes.bcadastraclienteClick(Sender: TObject);
@@ -98,11 +99,11 @@ begin
    if EdNome.text<>'' then begin
 
       w:=chr(39)+trim('%'+Ednome.Text+'%')+chr(39);
-      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf from clientes'+
+      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf,clie_uf from clientes'+
                            ' where '+s+' clie_nome like '+w+' order by clie_nome' );
    end else begin
 
-      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf from clientes '+
+      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf,clie_uf from clientes '+
                            s1+' order by clie_nome');
 
    end;
@@ -237,10 +238,10 @@ begin
    dm.QClientes.Sql.Clear;
    if EdCidade.text<>'' then begin
       w:=chr(39)+trim('%'+EdCidade.Text+'%')+chr(39);
-      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf from clientes'+
+      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf,clie_uf from clientes'+
                            ' where clie_cidade like '+w+' order by clie_nome' );
    end else begin
-      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf from clientes'+
+      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf,clie_uf from clientes'+
                            ' order by clie_nome');
 
    end;
@@ -274,10 +275,10 @@ begin
 //      w:=chr(39)+trim('%'+Edcnpjcpf.Text+'%')+chr(39);
 // 14.08.24 - pesquisa pelo cnpj tem q ser pelo começo
       w:=chr(39)+trim(Edcnpjcpf.Text+'%')+chr(39);
-      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf from clientes'+
+      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf,clie_uf from clientes'+
                            ' where clie_cnpjcpf like '+w+' order by clie_nome' );
    end else begin
-      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf from clientes'+
+      dm.QClientes.SQL.Add('select clie_codigo,clie_nome,clie_cidade,clie_razaosocial,clie_cnpjcpf,clie_uf from clientes'+
                            ' order by clie_nome');
 
    end;

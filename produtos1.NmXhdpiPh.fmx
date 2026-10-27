@@ -1,0 +1,33 @@
+inherited FProdutos1_NmXhdpiPh: TFProdutos1_NmXhdpiPh
+  ClientHeight = 615
+  ClientWidth = 400
+  DesignerMasterStyle = 3
+  inherited sg: TStringGrid
+    Position.Y = 250.000000000000000000
+    Size.Width = 400.000000000000000000
+    Viewport.Width = 400.000000000000000000
+    Viewport.Height = 365.000000000000000000
+    inherited esto_imagem: TStringColumn
+      Size.Width = 30.000000000000000000
+    end
+    inherited esto_descricao: TStringColumn
+      Size.Width = 500.000000000000000000
+    end
+    inherited esto_codigo: TStringColumn
+      Size.Width = 70.000000000000000000
+    end
+    inherited esto_unidade: TStringColumn
+      Size.Width = 60.000000000000000000
+    end
+  end
+  inherited ToolBar1: TToolBar
+    Size.Width = 400.000000000000000000
+    inherited AniIndicator2: TAniIndicator
+      Position.X = 339.000000000000000000
+      Position.Y = 37.000000000000000000
+    end
+  end
+  inherited AniIndicator3: TAniIndicator
+    Position.X = 339.000000000000000000
+  end
+end

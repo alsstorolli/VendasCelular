@@ -22,6 +22,8 @@ type
     BindingsList1: TBindingsList;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
+    lmens: TLabel;
+    AniIndicator2: TAniIndicator;
     procedure bpesquisaClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure sgSelectCell(Sender: TObject; const ACol, ARow: Integer;
@@ -32,19 +34,25 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure Mensagem(xmens:string;tempo:integer=0);
+
   end;
 
 var
   Fprodutos: TFprodutos;
   xcol,xlin:integer;
 
+  const colcodigo:integer=2;coldescricao:integer=1;colunidade:integer=3;colpreco:integer=4;
+        coldesconto:integer=5;
+
+
 implementation
 
 uses datam,pedido;
 
 {$R *.fmx}
-{$R *.LgXhdpiTb.fmx ANDROID}
-{$R *.SmXhdpiPh.fmx ANDROID}
+//{$R *.LgXhdpiTb.fmx ANDROID}
+//{$R *.SmXhdpiPh.fmx ANDROID}
 
 procedure TFprodutos.bpesquisaClick(Sender: TObject);
 /////////////////////////////////////////////////////
@@ -55,10 +63,10 @@ begin
    dm.QProdutos.Sql.Clear;
    if EdDescricao.text<>'' then begin
       w:=chr(39)+trim('%'+EdDescricao.Text+'%')+chr(39);
-      dm.QProdutos.SQL.Add('select esto_codigo,esto_descricao,esto_unidade,(select esqt_vendavis from estoqueqtde where esto_codigo=esqt_esto_codigo) as precovenda from estoque'+
+      dm.QProdutos.SQL.Add('select esto_codigo,esto_descricao,esto_unidade,esto_desconto,(select esqt_vendavis from estoqueqtde where esto_codigo=esqt_esto_codigo) as precovenda from estoque'+
                            ' where esto_descricao like '+w+' order by esto_descricao' );
    end else begin
-      dm.QProdutos.SQL.Add('select esto_codigo,esto_descricao,esto_unidade,(select esqt_vendavis from estoqueqtde where esto_codigo=esqt_esto_codigo) as precovenda from estoque'+
+      dm.QProdutos.SQL.Add('select esto_codigo,esto_descricao,esto_unidade,esto_desconto,(select esqt_vendavis from estoqueqtde where esto_codigo=esqt_esto_codigo) as precovenda from estoque'+
                            ' order by esto_descricao');
 
    end;
@@ -73,15 +81,53 @@ end;
 procedure TFprodutos.FormActivate(Sender: TObject);
 begin
   if not dm.conexao.Connected then dm.conexao.Connected:=true;
-  if dm.QProdutos.Active then dm.QProdutos.open;
+//{
+  TThread.CreateAnonymousThread(procedure
+  begin
+       Mensagem('Aguarde, carregando produtos');
+        AniIndicator2.Visible := true;
+        AniIndicator2.Enabled := true;
+       if not dm.QProdutos.Active then dm.QProdutos.open;
+       TThread.Synchronize(nil, procedure
+         begin
+//                        TLoading.Hide;
+            AniIndicator2.Visible := false;
+            AniIndicator2.Enabled := false;
+            Mensagem(' ');
+
+         end);
+
+  end).Start;
+//}
+{
+       Mensagem('Aguarde, carregando produtos');
+       if not dm.QProdutos.Active then dm.QProdutos.open;
+       Mensagem(' ');
+}
+end;
+
+procedure TFprodutos.Mensagem(xmens: string; tempo: integer);
+begin
+   lmens.Text:=xmens;
+   lmens.UpdateEffects;
+   if tempo > 0 then
+      Sleep( tempo );
 end;
 
 procedure TFprodutos.sbClick(Sender: TObject);
 begin
   if xlin>=0 then begin
+  {
     FPedido.EdCodpro.text:=sg.Cells[0,xlin];
     FPedido.EdDescricao.text:=sg.Cells[1,xlin];
     FPedido.EdUnitario.text:=sg.Cells[3,xlin];
+}
+    FPedido.EdCodpro.text:=sg.Cells[colcodigo,xlin];
+    FPedido.EdDescricao.text:=sg.Cells[coldescricao,xlin];
+    FPedido.EdUnitario.text:=sg.Cells[colpreco,xlin];
+
+    FPedido.EdDescontoMaximo.text := sg.cells[coldesconto,xlin];
+
     FPedido.EdQtde.text:='';
     FPedido.EdQtde.SetFocus;
   end;

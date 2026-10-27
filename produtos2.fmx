@@ -1,0 +1,104 @@
+object FProdutos2: TFProdutos2
+  Left = 0
+  Top = 0
+  Caption = 'Consulta de Produtos'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object ListView1: TListView
+    ItemAppearanceClassName = 'TDynamicAppearance'
+    ItemEditAppearanceClassName = 'TDynamicAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    OnUpdateObjects = ListView1UpdateObjects
+    Align = Bottom
+    Position.Y = 69.000000000000000000
+    Size.Width = 640.000000000000000000
+    Size.Height = 411.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    ItemAppearance.ItemHeight = 80
+    ItemAppearance.ItemEditHeight = 60
+    ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'TxtDescricao'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.TextAlign = Leading
+        Appearance.TextVertAlign = Leading
+        Appearance.WordWrap = True
+        Appearance.TextColor = claSteelblue
+        Appearance.Width = 619.000000000000000000
+        Appearance.Height = 50.000000000000000000
+        Appearance.PlaceOffset.Y = 10.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'Txtpreco'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.StyleExt = {00070000000000000004000000}
+        Appearance.TextVertAlign = Trailing
+        Appearance.TextColor = claSteelblue
+        Appearance.Width = 150.000000000000000000
+        Appearance.Height = 20.000000000000000000
+        Appearance.Align = Center
+        Appearance.PlaceOffset.Y = 60.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'Txtunidade'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = claSteelblue
+        Appearance.Width = 80.000000000000000000
+        Appearance.Height = 20.000000000000000000
+        Appearance.PlaceOffset.Y = 50.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'Txtdesconto'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.TextAlign = Trailing
+        Appearance.TextColor = claSteelblue
+        Appearance.Width = 90.000000000000000000
+        Appearance.Height = 20.000000000000000000
+        Appearance.Align = Trailing
+        Appearance.PlaceOffset.Y = 50.000000000000000000
+      end>
+    ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+      end>
+    ItemAppearanceObjects.FooterObjects.Text.PlaceOffset.Y = 40.000000000000000000
+    OnItemClick = ListView1ItemClick
+  end
+  object EdDescricao: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 1
+    Position.X = 23.000000000000000000
+    Position.Y = 21.000000000000000000
+    Size.Width = 236.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Descri'#231#227'o'
+  end
+  object bpesquisa: TSpeedButton
+    Position.X = 267.000000000000000000
+    Position.Y = 13.000000000000000000
+    Size.Width = 48.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'searchtoolbutton'
+    Text = 'bpesquisa'
+    TextSettings.Trimming = None
+    OnClick = bpesquisaClick
+  end
+  object AniIndicator2: TAniIndicator
+    Position.X = 312.000000000000000000
+    Position.Y = 21.000000000000000000
+    Size.Width = 40.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    Style = Circular
+  end
+end

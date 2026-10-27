@@ -6,7 +6,7 @@ inherited Fprodutos_LgXhdpiTb: TFprodutos_LgXhdpiTb
     Position.Y = 464.000000000000000000
     Size.Width = 480.000000000000000000
     Viewport.Width = 480.000000000000000000
-    Viewport.Height = 333.000000000000000000
+    Viewport.Height = 365.000000000000000000
   end
   inherited ToolBar1: TToolBar
     Size.Width = 480.000000000000000000

@@ -34,6 +34,7 @@ type
     QCampo: TFDQuery;
     TabProdutos: TFDTable;
     QPed: TFDQuery;
+    FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     procedure conexaoBeforeConnect(Sender: TObject);
   private
     { Private declarations }
@@ -54,8 +55,12 @@ procedure Tdm.conexaoBeforeConnect(Sender: TObject);
 begin
   {$IFDEF ANDROID}
   dm.Conexao.Params.Values['Database'] := TPath.Combine(TPath.GetDocumentsPath, 'sacandroid.db3');
+//  {$ELSEIF DEFINED(MSWINDOWS)}
+  {$ELSEIF DEFINED(RELEASE)}
+//  dm.Conexao.Params.Values['Database'] := '\Delphixe7Projetos\Vendas\BancodeDados\sacandroid.db';
+     dm.Conexao.Params.Values['Database'] := 'C:\ProjetosDelphi12.1\VendasCelular\Win32\Release\sacandroid.db';
   {$ELSE}
-  dm.Conexao.Params.Values['Database'] := '\Delphixe7Projetos\Vendas\BancodeDados\sacandroid.db';
+     dm.Conexao.Params.Values['Database'] := 'C:\ProjetosDelphi12.1\VendasCelular\Win32\Debug\sacandroid.db';
   {$ENDIF}
 
 end;

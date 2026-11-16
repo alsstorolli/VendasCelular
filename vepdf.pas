@@ -48,41 +48,17 @@ implementation
 
 procedure TFVePDF.Execute(xarq: string);
 var  arquivo:string;
+ {$IFDEF ANDROID}
   Intent: JIntent;
   J: JFile;
   LUri: Jnet_Uri;
-  Sharedpath:string;
   Permissao:JString;
+{$ENDIF}
+
+  Sharedpath:string;
 begin
 
-//  arquivo:='file://' + xarq;
-//  arquivo:='file:/' + xarq;
-//  arquivo:='file:' + xarq;
-//  arquivo:='file:///' + xarq;
-//  arquivo:=xarq;
-//  ShowMessage('Arquivo='+arquivo+' xarq='+xarq);
-
-//  SharedPath:=TPath.Combine(TPath.GetSharedDocumentsPath,'AppSac');
-//  if not DirectoryExists(SharedPath) then
-//     ForceDirectories(SharedPath);
-
-//  ShowMessage('Apos sharedpath  Sharedpath='+sharedpath+' xarq='+xarq);
-
-//  SharedPath:=TPath.Combine(SharedPath,xarq);
-//  ShowMessage('Apos sharedpath tpath.combine... Sharedpath='+sharedpath+' xarq='+xarq);
-
-//  if TFile.Exists(Sharedpath) then TFile.Delete(Sharedpath);
-
-//  ShowMessage('Apos fileexists delete. Sharedpath='+sharedpath+' Arquivo='+arquivo+' xarq='+xarq);
-
-//  TFile.Copy(xarq,sharedpath);
-
-//  ShowMessage('Apos o copy.  Sharedpath='+sharedpath+' xarq='+xarq);
-
-//  xarq:=sharedpath;
-
-//  ShowMessage('Sharedpath='+sharedpath);
-//  arquivo:='file:/' + xarq;
+ {$IFDEF ANDROID}
   Permissao:=StringToJString(JStringToString(TAndroidHelper.Context.getApplicationContext.getPackageName) + '.fileprovider');
   // Certifique-se de que o arquivo existe
   if TFile.Exists(xarq) then
@@ -106,38 +82,10 @@ begin
           ShowMessage('Erro ao abrir o PDF: ' + E.Message);
       end;
 
-
-{
-    Intent := TJIntent.JavaClass.init;
-    Intent.setAction(TJIntent.JavaClass.ACTION_VIEW);
-    J := TJFile.JavaClass.init(StringToJString(xarq));
-    Intent.setDataAndType(TAndroidHelper.JFileToJURI(J), StringToJString('application/pdf'));
-    Intent.setFlags(TJintent.JavaClass.FLAG_GRANT_READ_URI_PERMISSION);
-    SharedActivity.StartActivity(Intent);
-}
-
-    {
-      PDFFile := TJavaFile.JavaObject.init(PDFPath);
-      PDFUri := TAndroidContent.JavaClass.From(TAndroidContent). getContentUri(PDFFile);
-
-      // 3. Criar o Intent para exibir o PDF
-      Intent := TAndroidIntent.Create;
-      Intent.setAction(TJIntent.JavaClass.ACTION_VIEW); // Ação para visualizar
-      Intent.setData(JObject(PDFUri)); // Define o URI do PDF
-      Intent.setType(JStringToString('application/pdf')); // Tipo MIME do PDF
-      Intent.addFlags(TJIntent.JavaClass.FLAG_GRANT_READ_URI_PERMISSION); // Concede permissão de leitura
-
-      // 4. Iniciar a atividade do visualizador de PDF
-      try
-        TJActivityManager.JavaClass.getFrom(TAndroidApp.Context).startActivity(Intent);
-      except
-        on E: Exception do
-          ShowMessage('Erro ao abrir o PDF: ' + E.Message);
-      end;
-      }
   end
   else
     ShowMessage('Arquivo '+xarq+' não encontrado.');
+{$ENDIF}
 
 
 {

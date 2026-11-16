@@ -16,7 +16,9 @@ uses
   classeprodutos in 'classeprodutos.pas',
   classecondicao in 'classecondicao.pas',
   Gerapdfpedidovenda in 'Gerapdfpedidovenda.pas',
-  vepdf in 'vepdf.pas' {FVePDF};
+  vepdf in 'vepdf.pas' {FVePDF},
+  classepedidodetalhe in 'classepedidodetalhe.pas',
+  classepedidomestre in 'classepedidomestre.pas';
 
 {$R *.res}
 

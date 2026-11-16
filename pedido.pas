@@ -136,6 +136,8 @@ type
     sbimportacondicao: TSpeedButton;
     EdPortaFtp: TEdit;
     bgerapdf: TCornerButton;
+    sbimportahistmestre: TSpeedButton;
+    Memomsg: TMemo;
     procedure sbclientesClick(Sender: TObject);
     procedure sbimpclientesClick(Sender: TObject);
     procedure cbClick(Sender: TObject);
@@ -191,12 +193,13 @@ type
     procedure sbimpprodutosapiClick(Sender: TObject);
     procedure sbimportacondicaoClick(Sender: TObject);
     procedure bgerapdfClick(Sender: TObject);
+    procedure sbimportahistmestreClick(Sender: TObject);
   private
     { Private declarations }
 
   public
     { Public declarations }
-    procedure mensagem(xmens:string;tempo:integer=0);
+    procedure mensagem(xmens:string;tempo:integer=0;memo:string='N');
     procedure Editstogrid;
     function GetLinhaembranco(xsg:TStringgrid):integer;
     function SomaGrid:currency;
@@ -222,6 +225,10 @@ type
 // 20.12.24
     procedure BaixaApicondicao;
     procedure IncluiCondicao(cjson:string);
+// 11.11.26 - porca
+    procedure BaixaHistoricoPedidos;
+    procedure IncluiHistPedidosMestre(cjson:string);
+    procedure IncluiHistPedidosDetalhe(cjson:string);
 // 14.01.25
     function TiraBarra(s: string ;  caracter:string='/';caracternolugar:string='' ): string;
 
@@ -240,10 +247,10 @@ var
   TotalPedido,
   codportador,
   codfpgt,
-  porta      :string;
+  porta,
+  sqldetalhe      :string;
 
 const xunidade : string = '001';
-//////porta : string = '9000';  // depois usa da configuracao
 const colcodigo=0;colnome=1;colunidade=2;colqtde=3;colvenda=4;coltotalitem=5;coldesconto=6;
       coldataproducao=7;
 
@@ -251,7 +258,7 @@ implementation
 
 uses datam,clientes,produtos, portadores, condicao, Produtos1,FMX.VirtualKeyboard, FMX.Platform,
      pedevalores,classeportadores, System.Generics.Collections,classeclientes,classeprodutos,
-     classecondicao, gerapdfpedidovenda;
+     classecondicao, gerapdfpedidovenda,classepedidomestre,classepedidodetalhe;
 
 {$R *.fmx}
 
@@ -1179,6 +1186,46 @@ begin
          Mensagem('retorno api='+IntToSTR(LResponse.StatusCode)+'-'+copy(retorno,1,2000),2000);
 end;
 
+// 11.11.26
+procedure TFPedido.BaixaHistoricoPedidos;
+//////////////////////////////////////////
+var ipservidor:string;
+    retorno : string;
+    LResponse:IResponse;
+begin
+
+     Mensagem('baixando pedidos mestre da api',1000,'S');
+     if cb.IsChecked then ipservidor:=Edenderecoftplocal.text
+     else ipservidor:=Edenderecoftp.text;
+     LResponse:=TRequest.New.BaseURL( 'http://'+ipservidor+':'+Edporta.Text+'/pedidosmestre')
+                 .Accept('application/json')
+                 .Get;
+//                 .Token('Bearer '+FToken)
+//                 .AddBody(cJson).Put;
+      retorno:=LResponse.Content;
+      if LResponse.StatusCode=200 then begin
+         Mensagem('incluindo pedidos mestre...',1000,'S');
+         IncluiHistPedidosMestre(retorno);
+      end else
+         Mensagem('retorno api='+IntToSTR(LResponse.StatusCode)+'-'+copy(retorno,1,2000),2000,'S');
+
+     Mensagem('baixando pedidos detalhe da api',1000,'S');
+     if cb.IsChecked then ipservidor:=Edenderecoftplocal.text
+     else ipservidor:=Edenderecoftp.text;
+     LResponse:=TRequest.New.BaseURL( 'http://'+ipservidor+':'+Edporta.Text+'/pedidosdetalhe')
+                 .Accept('application/json')
+                 .Get;
+//                 .Token('Bearer '+FToken)
+//                 .AddBody(cJson).Put;
+      retorno:=LResponse.Content;
+      if LResponse.StatusCode=200 then begin
+         Mensagem('incluindo pedidos detalhe...',1000,'S');
+         IncluiHistPedidosDetalhe(retorno);
+      end else
+         Mensagem('retorno api='+IntToSTR(LResponse.StatusCode)+'-'+copy(retorno,1,2000),2000,'S');
+
+end;
+
 procedure TFPedido.FormActivate(Sender: TObject);
 //////////////////////////////////////////////////////
 var x:TEdit;
@@ -1250,7 +1297,7 @@ begin
     pastanoftp01:=EdPasta01ftp.Text;
     dm.Q.Close;
   end;
-
+  sqldetalhe:='';
 end;
 
 function TFPedido.FormataData(data: TDatetime; ano: boolean): string;
@@ -1487,6 +1534,159 @@ begin
     Dm.TabFpgto.Close();
 end;
 
+// 11.11.26
+procedure TFPedido.IncluiHistPedidosDetalhe(cjson: string);
+///////////////////////////////////////////////////////////
+var obj:TJSONObject;
+    pedidosMApi:TJSONArray;
+    PedidoD:TPedidoDetalhe;
+    ListaPedidos:TObjectList<TPedidoDetalhe>;
+    p:integer;
+begin
+
+    mensagem('parse no '+copy(cjson,1,2000)+' montando obj',0,'S');
+    obj := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(cjson), 0) as TJSONObject;
+    mensagem('formando array de Pedidos',0,'S');
+    pedidosMApi := obj.GetValue<TJSONArray>('movpeddet');
+    ListaPedidos:=TObjectList<TPedidoDetalhe>.Create;
+    for p := 0 to pedidosMApi.Size - 1 do begin
+      PedidoD:=TPedidoDetalhe.Create;
+      PedidoD.mpdd_transacao:=pedidosMApi[p].GetValue<string>('mpdd_transacao');
+      PedidoD.mpdd_numerodoc:=pedidosMApi[p].GetValue<integer>('mpdd_numerodoc');
+      PedidoD.mpdd_tipo_codigo:=pedidosMApi[p].GetValue<integer>('mpdd_tipo_codigo');
+      PedidoD.mpdd_unid_codigo:=pedidosMApi[p].GetValue<string>('mpdd_unid_codigo');
+      PedidoD.mpdd_datamvto:=pedidosMApi[p].GetValue<TDatetime>('mpdd_datamvto');
+      PedidoD.mpdd_qtde:=pedidosMApi[p].GetValue<Double>('mpdd_qtde');
+      PedidoD.mpdd_venda:=pedidosMApi[p].GetValue<Double>('mpdd_venda');
+      ListaPedidos.Add(PedidoD);
+    end;
+    if ListaPedidos.Count>0 then begin
+       if not dm.conexao.Connected then dm.conexao.Connected:=true;
+       mensagem('Apagando Pedidos Detalhe do sistema',0,'S');
+       dm.Q.Close;
+       dm.Q.sql.Clear;
+       dm.Q.sql.Add('delete from movpeddet where mpdd_status = ''U''');
+       dm.Q.ExecSQL;
+       dm.Q.Close;
+       if not Dm.TabPedidosD.Active then Dm.TabPedidosD.Open();
+       mensagem('Incluindo '+IntToStr(ListaPedidos.Count)+' pedidos detalhe no sistema',2000,'S');
+       for p:=0 to Pred(ListaPedidos.Count) do begin
+       dm.TabPedidosD.Insert;
+       dm.TabPedidosD.FieldByName('mpdd_status').AsString:='U';
+       dm.TabPedidosD.FieldByName('mpdd_numerodoc').AsInteger:=ListaPedidos[p].mpdd_numerodoc;
+       dm.TabPedidosD.FieldByName('mpdd_datamvto').AsDatetime:=ListaPedidos[p].mpdd_datamvto;
+       dm.TabPedidosD.FieldByName('mpdd_tipo_codigo').AsInteger:=ListaPedidos[p].mpdd_tipo_codigo;
+       dm.TabPedidosD.FieldByName('mpdd_tipomov').AsString:='PV';
+       dm.TabPedidosD.FieldByName('mpdd_qtde').AsCurrency:=ListaPedidos[p].mpdd_qtde;
+       dm.TabPedidosD.FieldByName('mpdd_venda').AsCurrency:=ListaPedidos[p].mpdd_venda;
+       try
+         dm.TabPedidosD.Post;
+       except on E:Exception do
+           showmessage('Problemas no post tabpedidosD.post. Mensagem : '+E.Message );
+       end;
+       end;
+       if (ListaProdutos.Count>0) then begin
+         mensagem('Efetuando a gravação dos pedidos detalhe no sistema',2000,'S');
+         try
+           dm.TabPedidosD.CachedUpdates:=true;
+           dm.TabPedidosD.CommitUpdates;
+         except
+//         on E:Exception do
+           raise Exception.Create('Problema no commitupdates dos pedidos detalhe');
+         end;
+       end;
+    end;
+    mensagem('Incluido '+IntToStr(ListaProdutos.Count)+' Pedidos Detalhe no sistema');
+    Dm.TabPedidosD.Close();
+end;
+
+procedure TFPedido.IncluiHistPedidosMestre(cjson: string);
+///////////////////////////////////////////////////////////
+var obj:TJSONObject;
+    pedidosMApi:TJSONArray;
+    PedidoM:TPedidoMestre;
+    ListaPedidos:TObjectList<TPedidoMestre>;
+    p:integer;
+begin
+
+    mensagem('parse no '+copy(cjson,1,2000)+' montando obj',0,'S');
+    obj := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(cjson), 0) as TJSONObject;
+    mensagem('formando array de Pedidos',1,'S');
+    pedidosMApi := obj.GetValue<TJSONArray>('movped');
+    ListaPedidos:=TObjectList<TPedidoMestre>.Create;
+    mensagem('formado array de Pedidos Mestre com '+IntToStr(pedidosMApi.Count)+' registros',1,'S');
+    for p := 0 to Pred(pedidosMApi.Count) do begin
+      PedidoM:=TPedidoMestre.Create;
+      mensagem('percorrendo array de Pedidos Mestre novo registro',1,'S');
+      PedidoM.mped_transacao:=pedidosMApi[p].GetValue<string>('mped_transacao');
+      PedidoM.mped_numerodoc:=pedidosMApi[p].GetValue<integer>('mped_numerodoc');
+      PedidoM.mped_tipo_codigo:=pedidosMApi[p].GetValue<integer>('mped_tipo_codigo');
+      PedidoM.mped_unid_codigo:=pedidosMApi[p].GetValue<string>('mped_unid_codigo');
+      PedidoM.mped_datamvto:=pedidosMApi[p].GetValue<TDatetime>('mped_datamvto');
+      mensagem('percorrendo array de Pedidos Mestre meio do registro ',1,'S');
+      PedidoM.mped_vlrtotal:=pedidosMApi[p].GetValue<Double>('mped_vlrtotal');
+      PedidoM.mped_totprod:=pedidosMApi[p].GetValue<Double>('mped_totprod');
+      mensagem('percorrendo array de Pedidos Mestre depois de totprod',1,'S');
+      PedidoM.mped_fpgt_prazos:=pedidosMApi[p].GetValue<string>('mped_fpgt_prazos');
+      PedidoM.mped_fpgt_codigo:=pedidosMApi[p].GetValue<string>('mped_fpgt_codigo');
+      PedidoM.mped_port_codigo:=pedidosMApi[p].GetValue<string>('mped_port_codigo');
+      mensagem('percorrendo array de Pedidos Mestre com '+DatetoStr(PedidoM.mped_datamvto)+' registros',1,'S');
+      mensagem('antes do add em listapedidos',1,'S');
+      ListaPedidos.Add(PedidoM);
+      mensagem('apos add em listapedidos',1,'S');
+    end;
+    mensagem('Checando quantidade de pedidos mestre em ListaPedidos',2000,'S');
+    if ListaPedidos.Count>0 then begin
+       if not dm.conexao.Connected then dm.conexao.Connected:=true;
+       mensagem('Apagando Pedidos Mestre do sistema',1,'S');
+       dm.Q.Close;
+       dm.Q.sql.Clear;
+       dm.Q.sql.Add('delete from movped where mped_status = ''U''');
+       dm.Q.ExecSQL;
+       dm.Q.Close;
+       if not Dm.TabPedidosM.Active then Dm.TabPedidosM.Open();
+       mensagem('Incluindo '+IntToStr(ListaPedidos.Count)+' pedidos mestre no sistema',2000,'S');
+       for p:=0 to Pred(ListaPedidos.Count) do begin
+         dm.TabPedidosM.Insert;
+         dm.TabPedidosM.FieldByName('mped_status').AsString:='U';
+         dm.TabPedidosM.FieldByName('mped_numerodoc').AsInteger:=ListaPedidos[p].mped_numerodoc;
+         dm.TabPedidosM.FieldByName('mped_datamvto').AsDatetime:=ListaPedidos[p].mped_datamvto;
+         dm.TabPedidosM.FieldByName('mped_dataemissao').AsDateTime:=ListaPedidos[p].mped_datamvto;
+         dm.TabPedidosM.FieldByName('mped_tipo_codigo').AsInteger:=ListaPedidos[p].mped_tipo_codigo;
+         dm.TabPedidosM.FieldByName('mped_tipomov').AsString:='PV';
+         dm.TabPedidosM.FieldByName('mped_fpgt_codigo').AsString:=ListaPedidos[p].mped_fpgt_codigo;
+         dm.TabPedidosM.FieldByName('mped_port_codigo').AsString:=ListaPedidos[p].mped_port_codigo;
+         try
+           dm.TabPedidosM.FieldByName('mped_vlrtotal').Ascurrency:=ListaPedidos[p].mped_vlrtotal;
+         except on E:Exception do
+             showmessage('Problemas no ascurrency do mped_vlrtotal. Mensagem : '+E.Message+' '+FloatToStr(ListaPedidos[p].mped_vlrtotal) );
+         end;
+//       dm.TabPedidosM.FieldByName('mped_contatopedido').AsString:=ListaPedidos[p].mped_vlrtotal
+// 26.08.24
+//       dm.TabPedidosM.FieldByName('mped_repr_codigo').AsString:=EdRepr_codigo.Text;
+
+         try
+           dm.TabPedidosM.Post;
+         except on E:Exception do
+             showmessage('Problemas no post tabpedidosM.post. Mensagem : '+E.Message );
+         end;
+       end;
+       if (ListaProdutos.Count>0) then begin
+         mensagem('Efetuando a gravação dos pedidos mestre no sistema',2000,'S');
+         try
+           dm.TabPedidosM.CachedUpdates:=true;
+           dm.TabPedidosM.CommitUpdates;
+         except
+//         on E:Exception do
+           raise Exception.Create('Problema no commitupdates dos pedidos mestre');
+         end;
+       end;
+    end else mensagem('Nenhum pedido mestre incluido.  ListaPedidos vazia',1,'S');
+    mensagem('Incluido '+IntToStr(ListaProdutos.Count)+' Pedidos Mestre no sistema');
+    Dm.TabPedidosM.Close();
+
+end;
+
 procedure TFPedido.IncluiPortadores(cjson: string);
 ////////////////////////////////////////////////////
 var obj:TJSONObject;
@@ -1502,7 +1702,7 @@ begin
     portadoresApi := obj.GetValue<TJSONArray>('portadores');
 //    mensagem('percorrendo array de portadores');
     ListaPortadores:=TObjectList<TClassePortadores>.Create;
-    for p := 0 to portadoresApi.Size - 1 do begin
+    for p := 0 to portadoresApi.Count - 1 do begin
       Portadores:=TClassePortadores.Create;
       Portadores.Codigo:=(portadoresApi[p].GetValue<string>('port_codigo'));
       Portadores.Descricao:=(portadoresApi[p].GetValue<string>('port_descricao'));
@@ -1553,7 +1753,7 @@ begin
     mensagem('formando array de Produtos');
     portadoresApi := obj.GetValue<TJSONArray>('produtos');
     ListaProdutos:=TObjectList<TProdutos>.Create;
-    for p := 0 to portadoresApi.Size - 1 do begin
+    for p := 0 to portadoresApi.Count - 1 do begin
       Produtos:=TProdutos.Create;
       Produtos.Esto_Codigo:=portadoresApi[p].GetValue<string>('esto_codigo');
       Produtos.Esto_Descricao:=(portadoresApi[p].GetValue<string>('esto_descricao'));
@@ -1666,13 +1866,14 @@ begin
 
 end;
 
-procedure TFPedido.mensagem(xmens:string;tempo:integer=0);
+procedure TFPedido.mensagem(xmens:string;tempo:integer=0;memo:string='N');
 //////////////////////////////////////////
 begin
-   lmens.Text:=xmens;
-//   lmens.UpdateEffects;
-//   Application.ProcessMessages;
-   Sleep( tempo );
+   if memo='N' then begin
+     lmens.Text:=xmens;
+     Sleep( tempo );
+   end else
+     Memomsg.Lines.Add(xmens);
 end;
 
 
@@ -2205,6 +2406,38 @@ begin
 
 end;
 
+procedure TFPedido.sbimportahistmestreClick(Sender: TObject);
+/////////////////////////////////////////////////////////////////
+begin
+//        AniIndicator1.Visible := true;
+//        AniIndicator1.Enabled := true;
+        Memomsg.Lines.Clear;
+        Mensagem('inicio baixa dos pedidos Mestre da api',1000,'S');
+//{
+        TThread.CreateAnonymousThread(procedure
+        begin
+
+                BaixaHistoricoPedidos;
+                TThread.Synchronize(nil, procedure
+                begin
+//                        TLoading.Hide;
+                   AniIndicator1.Visible := false;
+                   AniIndicator1.Enabled := false;
+//                   Mensagem('Terminado de baixar produtos da api',1000);
+
+                end);
+
+        end).Start;
+//}
+// se for em thread dá msg 'duplicates not allowed'
+{
+        Mensagem('inicio SEM THREAD DA baixa dos produtos da api',1000);
+        BaixaHistoricoPedidos;
+        AniIndicator1.Visible := false;
+        AniIndicator1.Enabled := false;
+}
+end;
+
 procedure TFPedido.sbimportaprodutoClick(Sender: TObject);
 //////////////////////////////////////////////////////////////////////////
 var Arquivonoftp,Arquivonoftp1:string;
@@ -2572,7 +2805,7 @@ begin
 
   dm.Q.SQL.Clear;
   dm.Q.SQL.Add('select movpeddet.*,esto_descricao,esto_unidade from movpeddet inner join estoque on ( esto_codigo=mpdd_esto_codigo )'+
-               ' where mpdd_numerodoc='+sgpedidos.Cells[0,arow] );
+               ' where mpdd_numerodoc='+sgpedidos.Cells[0,arow]+sqldetalhe );
   dm.Q.Open();
   sgpedidosd.RowCount:=0;
   sgpedidosd.UpdateEffects;
@@ -2891,10 +3124,11 @@ begin
 //  dm.Q.SQL.Add('select movped.*,clie_nome from movped inner join clientes on ( clie_codigo=mped_tipo_codigo ) where mped_datamvto='+datetosql(EdData.Date));
 //  dm.Q.SQL.Add('select movped.*,clie_nome from movped inner join clientes on ( clie_codigo=mped_tipo_codigo ) where mped_datamvto=date('''+FormatDateTime('YYYY-MM-DD',EdData.Date)+''')');
 // depois ver como pesquisar pela data direto na select
-  sqlcliente:='';
+  sqlcliente:='';sqldetalhe:='';
   if Sender is TEdit then begin
     if trim(TEdit(Sender).Text)<>'' then begin
-      sqlcliente:=' where mped_tipo_codigo = '+(TEdit(Sender).Text);
+      sqlcliente:=' where mped_tipo_codigo = '+(TEdit(Sender).Text)+' and mped_status = ''U''';
+      sqldetalhe:=' and mpdd_status = ''U''';
       ultimos:='S';
     end;
   end;

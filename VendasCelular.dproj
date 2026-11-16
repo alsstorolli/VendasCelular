@@ -359,6 +359,8 @@
             <Form>FVePDF</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="classepedidodetalhe.pas"/>
+        <DCCReference Include="classepedidomestre.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

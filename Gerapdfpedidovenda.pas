@@ -6,7 +6,7 @@ uses
 
  ACBr_fpdf,ACBr_fpdf_ext,ACBr_fpdf_report,SqlExpr,
  System.SysUtils, FMX.Dialogs, Datam,pedido, System.DateUtils,
- vepdf,System.IOUtils;
+ vepdf,System.IOUtils,vcl.forms;
 
 type TGerapdfpedidovenda = class
 
@@ -50,7 +50,8 @@ var
   vw: Double;
   titulo,
   caminho,
-  Arqlogo:string;
+  Arqlogo,
+  arquivot:string;
 
 begin
    {$IFDEF ANDROID}

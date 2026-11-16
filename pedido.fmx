@@ -1,9 +1,9 @@
 object FPedido: TFPedido
   Left = 0
   Top = 0
-  ActiveControl = TabItem3
+  ActiveControl = TabItem2
   Caption = 'Pedido de Venda'
-  ClientHeight = 564
+  ClientHeight = 699
   ClientWidth = 952
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -14,25 +14,25 @@ object FPedido: TFPedido
     Align = Client
     FullSize = True
     Size.Width = 952.000000000000000000
-    Size.Height = 564.000000000000000000
+    Size.Height = 699.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     TabPosition = Bottom
     Sizes = (
       952s
-      515s
+      650s
       952s
-      515s
+      650s
       952s
-      515s)
+      650s)
     object TabItem1: TTabItem
       CustomIcon = <
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 317.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -46,7 +46,7 @@ object FPedido: TFPedido
         Align = Bottom
         CanFocus = True
         ClipChildren = True
-        Position.Y = 251.000000000000000000
+        Position.Y = 386.000000000000000000
         Size.Width = 952.000000000000000000
         Size.Height = 264.000000000000000000
         Size.PlatformDefault = False
@@ -541,7 +541,7 @@ object FPedido: TFPedido
         end
       end
       object EdDtproducao: TDateEdit
-        Date = 45915.000000000000000000
+        Date = 46342.000000000000000000
         TodayDefault = True
         Hint = 'Data da produ'#231#227'o'
         Position.X = 7.000000000000000000
@@ -587,7 +587,7 @@ object FPedido: TFPedido
         Align = Bottom
         CanFocus = True
         ClipChildren = True
-        Position.Y = 291.000000000000000000
+        Position.Y = 426.000000000000000000
         Size.Width = 952.000000000000000000
         Size.Height = 224.000000000000000000
         Size.PlatformDefault = False
@@ -631,7 +631,7 @@ object FPedido: TFPedido
         end
       end
       object EdData: TDateEdit
-        Date = 45915.000000000000000000
+        Date = 46342.000000000000000000
         TodayDefault = True
         Position.X = 12.000000000000000000
         Position.Y = 263.000000000000000000
@@ -783,7 +783,7 @@ object FPedido: TFPedido
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 318.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -831,17 +831,6 @@ object FPedido: TFPedido
           Text = 'Usar Ftp Local'
           OnClick = cbClick
         end
-        object lmens: TLabel
-          StyledSettings = [Family, Style]
-          Position.X = 8.000000000000000000
-          Position.Y = 482.000000000000000000
-          Size.Width = 364.000000000000000000
-          Size.Height = 30.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 15.000000000000000000
-          TextSettings.FontColor = claChocolate
-          TextSettings.Trimming = None
-        end
         object Edusuarioftp: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           TabOrder = 2
@@ -868,7 +857,7 @@ object FPedido: TFPedido
       object sbcriabanco: TSpeedButton
         StyledSettings = [Family]
         Position.X = 9.000000000000000000
-        Position.Y = 423.000000000000000000
+        Position.Y = 427.000000000000000000
         Size.Width = 171.000000000000000000
         Size.Height = 30.000000000000000000
         Size.PlatformDefault = False
@@ -885,7 +874,7 @@ object FPedido: TFPedido
         StyledSettings = [Family, Style]
         ModalResult = 1
         Position.X = 5.000000000000000000
-        Position.Y = 201.000000000000000000
+        Position.Y = 197.000000000000000000
         Size.Width = 168.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
@@ -944,9 +933,9 @@ object FPedido: TFPedido
       object spsalvaconfig: TSpeedButton
         StyledSettings = [Family, Size, Style]
         Position.X = 9.000000000000000000
-        Position.Y = 314.000000000000000000
+        Position.Y = 371.000000000000000000
         Size.Width = 170.000000000000000000
-        Size.Height = 74.000000000000000000
+        Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'buttonstyle'
         Text = 'Salva Configura'#231#227'o'
@@ -957,7 +946,7 @@ object FPedido: TFPedido
       object sbcriaportadores: TSpeedButton
         StyledSettings = [Family]
         Position.X = 205.000000000000000000
-        Position.Y = 313.000000000000000000
+        Position.Y = 332.000000000000000000
         Size.Width = 158.000000000000000000
         Size.Height = 33.000000000000000000
         Size.PlatformDefault = False
@@ -974,7 +963,7 @@ object FPedido: TFPedido
         StyledSettings = [Family, Style]
         ModalResult = 1
         Position.X = 5.000000000000000000
-        Position.Y = 167.000000000000000000
+        Position.Y = 165.000000000000000000
         Size.Width = 168.000000000000000000
         Size.Height = 34.000000000000000000
         Size.PlatformDefault = False
@@ -989,7 +978,7 @@ object FPedido: TFPedido
       object sbcriaprodutos: TSpeedButton
         StyledSettings = [Family]
         Position.X = 206.000000000000000000
-        Position.Y = 352.000000000000000000
+        Position.Y = 363.000000000000000000
         Size.Width = 158.000000000000000000
         Size.Height = 33.000000000000000000
         Size.PlatformDefault = False
@@ -1004,7 +993,7 @@ object FPedido: TFPedido
       object sbcriaclientes: TSpeedButton
         StyledSettings = [Family]
         Position.X = 205.000000000000000000
-        Position.Y = 389.000000000000000000
+        Position.Y = 395.000000000000000000
         Size.Width = 158.000000000000000000
         Size.Height = 33.000000000000000000
         Size.PlatformDefault = False
@@ -1019,7 +1008,7 @@ object FPedido: TFPedido
       object sbcriaconfig: TSpeedButton
         StyledSettings = [Family]
         Position.X = 205.000000000000000000
-        Position.Y = 422.000000000000000000
+        Position.Y = 426.000000000000000000
         Size.Width = 83.000000000000000000
         Size.Height = 31.000000000000000000
         Size.PlatformDefault = False
@@ -1075,7 +1064,7 @@ object FPedido: TFPedido
         StyledSettings = [Family, Style]
         ModalResult = 1
         Position.X = 5.000000000000000000
-        Position.Y = 272.000000000000000000
+        Position.Y = 266.000000000000000000
         Size.Width = 168.000000000000000000
         Size.Height = 34.000000000000000000
         Size.PlatformDefault = False
@@ -1189,7 +1178,7 @@ object FPedido: TFPedido
       object sbestrtura: TSpeedButton
         StyledSettings = [Family]
         Position.X = 288.000000000000000000
-        Position.Y = 422.000000000000000000
+        Position.Y = 426.000000000000000000
         Size.Width = 76.000000000000000000
         Size.Height = 31.000000000000000000
         Size.PlatformDefault = False
@@ -1261,7 +1250,7 @@ object FPedido: TFPedido
         StyledSettings = [Family, Style]
         ModalResult = 1
         Position.X = 5.000000000000000000
-        Position.Y = 236.000000000000000000
+        Position.Y = 232.000000000000000000
         Size.Width = 168.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
@@ -1297,6 +1286,44 @@ object FPedido: TFPedido
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = ' Porta Ftp'
+      end
+      object sbimportahistmestre: TSpeedButton
+        StyledSettings = [Size, Style]
+        Position.X = 4.000000000000000000
+        Position.Y = 300.000000000000000000
+        Size.Width = 169.000000000000000000
+        Size.Height = 39.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'buttonstyle'
+        Text = 'Hist.Pedidos'
+        TextSettings.Font.Family = 'Comic Sans MS'
+        TextSettings.FontColor = claDarkgreen
+        TextSettings.Trimming = None
+        OnClick = sbimportahistmestreClick
+      end
+      object lmens: TLabel
+        StyledSettings = [Family, Style]
+        Position.X = 8.000000000000000000
+        Position.Y = 482.000000000000000000
+        Size.Width = 364.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.FontColor = claChocolate
+        TextSettings.Trimming = None
+        TabOrder = 98
+      end
+      object Memomsg: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Position.X = 9.000000000000000000
+        Position.Y = 568.000000000000000000
+        Size.Width = 354.000000000000000000
+        Size.Height = 74.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 99
+        Viewport.Width = 346.000000000000000000
+        Viewport.Height = 66.000000000000000000
       end
     end
     object PathAnimation1: TPathAnimation
@@ -1350,7 +1377,7 @@ object FPedido: TFPedido
     Params = <>
     Response = RESTResponse1
     SynchronizedEvents = False
-    Left = 584
-    Top = 183
+    Left = 464
+    Top = 191
   end
 end

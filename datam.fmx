@@ -278,6 +278,7 @@ object dm: Tdm
       '  mpdd_numerodoc numeric(8,0) NOT NULL,'
       '  mpdd_status character varying(1),'
       '  mpdd_situacao character varying(1),'
+      '  mpdd_tipomov character varying(2),'
       '  mpdd_esto_codigo character varying(20),'
       '  mpdd_tama_codigo numeric(5,0),'
       '  mpdd_core_codigo numeric(3,0),'

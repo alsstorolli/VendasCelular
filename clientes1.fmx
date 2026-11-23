@@ -1,0 +1,172 @@
+object FClientes1: TFClientes1
+  Left = 0
+  Top = 0
+  Caption = 'Clientes'
+  ClientHeight = 480
+  ClientWidth = 652
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object EdNome: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 3
+    Position.X = 11.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 163.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Nome'
+  end
+  object bpesquisa: TSpeedButton
+    Position.X = 177.000000000000000000
+    Position.Y = 6.000000000000000000
+    Size.Width = 34.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'searchtoolbutton'
+    Text = 'bpesquisa'
+    TextSettings.Trimming = None
+    OnClick = bpesquisaClick
+  end
+  object EdCidade: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 1
+    Position.X = 11.000000000000000000
+    Position.Y = 48.000000000000000000
+    Size.Width = 135.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Cidade'
+  end
+  object sbcidade: TSpeedButton
+    Position.X = 147.000000000000000000
+    Position.Y = 44.000000000000000000
+    Size.Width = 31.000000000000000000
+    Size.Height = 38.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'searchtoolbutton'
+    Text = 'Cidade'
+    TextSettings.Trimming = None
+    OnClick = sbcidadeClick
+  end
+  object bcadastracliente: TButton
+    StyledSettings = [Family, Size]
+    Position.X = 205.000000000000000000
+    Position.Y = 58.000000000000000000
+    Size.Width = 139.000000000000000000
+    Size.Height = 62.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    Text = 'Cadastra Cliente'
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claChocolate
+    TextSettings.Trimming = None
+    OnClick = bcadastraclienteClick
+  end
+  object AniIndicator2: TAniIndicator
+    Position.X = 214.000000000000000000
+    Position.Y = 6.000000000000000000
+    Size.Width = 40.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    Style = Circular
+  end
+  object lmens: TLabel
+    StyledSettings = [Family, Style]
+    Position.X = 268.000000000000000000
+    Size.Width = 70.000000000000000000
+    Size.Height = 27.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 18.000000000000000000
+    TextSettings.FontColor = claChocolate
+    TextSettings.Trimming = None
+    TabOrder = 9
+  end
+  object sbcnpjcpf: TSpeedButton
+    Position.X = 147.000000000000000000
+    Position.Y = 84.000000000000000000
+    Size.Width = 30.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'searchtoolbutton'
+    Text = 'Cidade'
+    TextSettings.Trimming = None
+    OnClick = sbcnpjcpfClick
+  end
+  object Edcnpjcpf: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 0
+    KeyboardType = NumberPad
+    MaxLength = 14
+    Position.X = 11.000000000000000000
+    Position.Y = 88.000000000000000000
+    Size.Width = 135.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Cnpj/cpf'
+  end
+  object ListView1: TListView
+    ItemAppearanceClassName = 'TDynamicAppearance'
+    ItemEditAppearanceClassName = 'TDynamicAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Align = Bottom
+    Position.Y = 80.000000000000000000
+    Size.Width = 652.000000000000000000
+    Size.Height = 400.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    ItemAppearance.ItemHeight = 160
+    ItemAppearance.ItemEditHeight = 60
+    ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'clie_nome'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.TextAlign = Leading
+        Appearance.TextVertAlign = Leading
+        Appearance.WordWrap = True
+        Appearance.TextColor = claSteelblue
+        Appearance.Width = 619.000000000000000000
+        Appearance.Height = 40.000000000000000000
+        Appearance.PlaceOffset.Y = 10.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'clie_cnpjcpf'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.StyleExt = {00070000000000000004000000}
+        Appearance.TextVertAlign = Trailing
+        Appearance.TextColor = claSteelblue
+        Appearance.Width = 170.000000000000000000
+        Appearance.Height = 20.000000000000000000
+        Appearance.Align = Center
+        Appearance.PlaceOffset.Y = 130.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'clie_razaosocial'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.TextAlign = Leading
+        Appearance.WordWrap = True
+        Appearance.TextColor = claSteelblue
+        Appearance.Width = 619.000000000000000000
+        Appearance.Height = 40.000000000000000000
+        Appearance.PlaceOffset.Y = 50.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'clie_cidade'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = claSteelblue
+        Appearance.Width = 220.000000000000000000
+        Appearance.Height = 20.000000000000000000
+        Appearance.PlaceOffset.Y = 100.000000000000000000
+      end>
+    ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+      end>
+    ItemAppearanceObjects.FooterObjects.Text.PlaceOffset.Y = 40.000000000000000000
+    OnItemClick = ListView1ItemClick
+  end
+end

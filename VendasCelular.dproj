@@ -5,7 +5,7 @@
         <FrameworkType>FMX</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Android64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>558099</TargetedPlatforms>
         <AppType>Application</AppType>
         <MainSource>VendasCelular.dpr</MainSource>
@@ -361,6 +361,14 @@
         </DCCReference>
         <DCCReference Include="classepedidodetalhe.pas"/>
         <DCCReference Include="classepedidomestre.pas"/>
+        <DCCReference Include="clientes1.pas">
+            <Form>FClientes1</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="produtos2.pas">
+            <Form>FProdutos2</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

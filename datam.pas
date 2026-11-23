@@ -46,7 +46,7 @@ var
 
 implementation
 
-uses System.IOUtils;
+uses System.IOUtils,  VCl.forms;
 
 {$R *.fmx}
 
@@ -55,7 +55,7 @@ begin
   {$IFDEF ANDROID}
   dm.Conexao.Params.Values['Database'] := TPath.Combine(TPath.GetDocumentsPath, 'sacandroid.db3');
   {$ELSE}
-  dm.Conexao.Params.Values['Database'] := '\Delphixe7Projetos\Vendas\BancodeDados\sacandroid.db';
+  dm.Conexao.Params.Values['Database'] := ExtractFilePath(Application.ExeName)+'\sacandroid.db';
   {$ENDIF}
 
 end;

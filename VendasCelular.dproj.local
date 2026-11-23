@@ -4,8 +4,8 @@
     <Transaction>2023/03/09 14:35:26.000.896,=C:\Users\Andre\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2023/08/23 17:57:55.000.977,=C:\Users\Andre\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2024/08/15 14:04:03.000.279,=C:\Users\Andre\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/08/15 14:05:45.000.620,C:\ProjetosDelphi12.1\VendasCelular\Unit1.pas=C:\Users\Andre\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2024/08/15 14:05:45.000.620,C:\ProjetosDelphi12.1\VendasCelular\Unit1.fmx=C:\Users\Andre\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2024/08/15 14:05:45.000.620,C:\ProjetosDelphi12.1\VendasCelular\Unit1.pas=C:\Users\Andre\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2024/08/15 14:06:12.000.006,C:\ProjetosDelphi12.1\VendasCelular\VendasCelular.dproj=C:\Users\Andre\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2024/09/02 17:41:54.000.737,=C:\ProjetosDelphi12.1\VendasCelular\Unit2.pas</Transaction>
     <Transaction>2024/09/02 17:42:07.000.816,C:\ProjetosDelphi12.1\VendasCelular\Unit2.pas=C:\ProjetosDelphi12.1\VendasCelular\Classeportadores.pas</Transaction>
@@ -21,14 +21,16 @@
     <Transaction>2025/08/29 17:04:15.000.033,C:\ProjetosDelphi12.1\VendasCelular\visualizapdf.fmx=C:\ProjetosDelphi12.1\VendasCelular\Unit2.fmx</Transaction>
     <Transaction>2025/08/29 17:04:15.000.033,C:\ProjetosDelphi12.1\VendasCelular\visualizapdf.pas=C:\ProjetosDelphi12.1\VendasCelular\Unit2.pas</Transaction>
     <Transaction>2025/08/29 18:40:21.000.272,=C:\ProjetosDelphi12.1\VendasCelular\Unit2.pas</Transaction>
-    <Transaction>2025/08/29 18:41:26.000.747,C:\ProjetosDelphi12.1\VendasCelular\vepdf.fmx=C:\ProjetosDelphi12.1\VendasCelular\Unit2.fmx</Transaction>
     <Transaction>2025/08/29 18:41:26.000.747,C:\ProjetosDelphi12.1\VendasCelular\vepdf.pas=C:\ProjetosDelphi12.1\VendasCelular\Unit2.pas</Transaction>
+    <Transaction>2025/08/29 18:41:26.000.747,C:\ProjetosDelphi12.1\VendasCelular\vepdf.fmx=C:\ProjetosDelphi12.1\VendasCelular\Unit2.fmx</Transaction>
     <Transaction>2025/08/29 18:43:40.000.464,C:\ProjetosDelphi12.1\VendasCelular\visualizapdf.pas=</Transaction>
     <Transaction>2025/09/03 10:41:59.000.179,=C:\ProjetosDelphi12.1\VendasCelular\Unit2.pas</Transaction>
     <Transaction>2026/11/11 08:31:40.000.483,=C:\ProjetosDelphi12.1\VendasCelular\classepedidomestre.pas</Transaction>
     <Transaction>2026/11/11 08:31:40.000.388,=C:\ProjetosDelphi12.1\VendasCelular\classepedidodetalhe.pas</Transaction>
+    <Transaction>2026/11/23 10:19:38.460,=C:\ProjetosDelphi12.1\VendasCelular\clientes1.pas</Transaction>
+    <Transaction>2026/11/23 10:22:15.293,=C:\ProjetosDelphi12.1\VendasCelular\produtos2.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android64="VC4DLNROHQW8MROJ" Android="VC4DLNROHQW8MROJ"/>
+		<NoProfile Android64="" Android=""/>
 	</ActiveMobileDevice>
 </BorlandProject>

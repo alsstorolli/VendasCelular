@@ -1471,6 +1471,10 @@ begin
          dm.TabClientes.FieldByName('clie_razaosocial').asstring:=Listaclientes[p].Clie_Razaosocial;
          dm.TabClientes.FieldByName('clie_cidade').asstring:=Listaclientes[p].Clie_Cidade;
          dm.TabClientes.FieldByName('clie_cnpjcpf').asstring:=Listaclientes[p].Clie_Cnpjcpf;
+         if length(Trim(Listaclientes[p].Clie_Cnpjcpf))=11 then
+            dm.TabClientes.FieldByName('clie_tipo').asstring:='F'
+         else
+            dm.TabClientes.FieldByName('clie_tipo').asstring:='J';
          dm.TabClientes.Post;
        end;
        if (ListaClientes.Count>0) then begin
@@ -1575,21 +1579,21 @@ begin
        if not Dm.TabPedidosD.Active then Dm.TabPedidosD.Open();
        mensagem('Incluindo '+IntToStr(ListaPedidos.Count)+' pedidos detalhe no sistema',2000,'S');
        for p:=0 to Pred(ListaPedidos.Count) do begin
-       dm.TabPedidosD.Insert;
-       dm.TabPedidosD.FieldByName('mpdd_status').AsString:='U';
-       dm.TabPedidosD.FieldByName('mpdd_numerodoc').AsInteger:=ListaPedidos[p].mpdd_numerodoc;
-       dm.TabPedidosD.FieldByName('mpdd_datamvto').AsDatetime:=ListaPedidos[p].mpdd_datamvto;
-       dm.TabPedidosD.FieldByName('mpdd_datalcto').AsDatetime:=Date();
-       dm.TabPedidosD.FieldByName('mpdd_tipo_codigo').AsInteger:=ListaPedidos[p].mpdd_tipo_codigo;
-//       dm.TabPedidosD.FieldByName('mpdd_tipomov').AsString:='PV';
-// 20.11.2026 - nem imagino o porque e só percebi agora q não tem este campo na estrutura no datam.pas então....
-       dm.TabPedidosD.FieldByName('mpdd_qtde').AsCurrency:=ListaPedidos[p].mpdd_qtde;
-       dm.TabPedidosD.FieldByName('mpdd_venda').AsCurrency:=ListaPedidos[p].mpdd_venda;
-       try
-         dm.TabPedidosD.Post;
-       except on E:Exception do
-           showmessage('Problemas no post tabpedidosD.post. Mensagem : '+E.Message );
-       end;
+         dm.TabPedidosD.Insert;
+         dm.TabPedidosD.FieldByName('mpdd_status').AsString:='U';
+         dm.TabPedidosD.FieldByName('mpdd_numerodoc').AsInteger:=ListaPedidos[p].mpdd_numerodoc;
+         dm.TabPedidosD.FieldByName('mpdd_datamvto').AsDatetime:=ListaPedidos[p].mpdd_datamvto;
+         dm.TabPedidosD.FieldByName('mpdd_datalcto').AsDatetime:=Date();
+         dm.TabPedidosD.FieldByName('mpdd_tipo_codigo').AsInteger:=ListaPedidos[p].mpdd_tipo_codigo;
+  //       dm.TabPedidosD.FieldByName('mpdd_tipomov').AsString:='PV';
+  // 20.11.2026 - nem imagino o porque e só percebi agora q não tem este campo na estrutura no datam.pas então....
+         dm.TabPedidosD.FieldByName('mpdd_qtde').AsCurrency:=ListaPedidos[p].mpdd_qtde;
+         dm.TabPedidosD.FieldByName('mpdd_venda').AsCurrency:=ListaPedidos[p].mpdd_venda;
+         try
+           dm.TabPedidosD.Post;
+         except on E:Exception do
+             showmessage('Problemas no post tabpedidosD.post. Mensagem : '+E.Message );
+         end;
        end;
        if (ListaPedidos.Count>0) then begin
          mensagem('Efetuando a gravação dos pedidos detalhe no sistema',2000,'S');

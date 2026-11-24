@@ -6,7 +6,7 @@ uses
 
  ACBr_fpdf,ACBr_fpdf_ext,ACBr_fpdf_report,SqlExpr,
  System.SysUtils, FMX.Dialogs, Datam,pedido, System.DateUtils,
- vepdf,System.IOUtils,vcl.forms;
+ vepdf,System.IOUtils;
 
 type TGerapdfpedidovenda = class
 
@@ -41,6 +41,10 @@ var arquivo,
 
 
 implementation
+
+{$IFDEF MSWINDOWS}
+   uses  VCl.forms;
+{$ENDIF}
 
 { TGerapdfpedidovenda }
 
@@ -146,7 +150,7 @@ begin
         ' inner join movped on ( mped_numerodoc=mpdd_numerodoc and mped_datamvto=mpdd_datamvto )'+
 //        ' inner join clientes on ( clie_codigo=mped_tipo_codigo )'+
         ' inner join estoque on ( mpdd_esto_codigo=esto_codigo)'+
-        ' where mpdd_status = ''N'''+
+        ' where mpdd_status in (''N'',''U'')'+
 //        ' and mped_tipo_codigo= '+
         ' and mpdd_numerodoc = '+inttostr(xNUmero)+
         ' and mpdd_datamvto = '+DateToSql(xemissao));

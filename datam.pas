@@ -46,7 +46,10 @@ var
 
 implementation
 
-uses System.IOUtils,  VCl.forms;
+uses System.IOUtils;
+{$IFDEF MSWINDOWS}
+   uses  VCl.forms;
+{$ENDIF}
 
 {$R *.fmx}
 

@@ -1,7 +1,6 @@
 object FPedido: TFPedido
   Left = 0
   Top = 0
-  ActiveControl = TabItem2
   Caption = 'Pedido de Venda'
   ClientHeight = 699
   ClientWidth = 952
@@ -17,7 +16,7 @@ object FPedido: TFPedido
     Size.Height = 699.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     TabPosition = Bottom
     Sizes = (
@@ -32,7 +31,7 @@ object FPedido: TFPedido
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 317.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -59,7 +58,7 @@ object FPedido: TFPedido
         RowCount = 0
         OnSelectCell = sgSelectCell
         Viewport.Width = 952.000000000000000000
-        Viewport.Height = 264.000000000000000000
+        Viewport.Height = 232.000000000000000000
         object esto_codigo: TStringColumn
           Header = 'Codigo'
           HeaderSettings.TextSettings.WordWrap = False
@@ -340,7 +339,7 @@ object FPedido: TFPedido
           Size.PlatformDefault = False
           TextSettings.FontColor = claSnow
           TextSettings.Trimming = None
-          Text = 'Vendas Sac Vers'#227'o 2.1 - Celular'
+          Text = 'Vendas Sac Vers'#227'o 2.2 - Celular'
         end
       end
       object CornerButton1: TCornerButton
@@ -485,8 +484,8 @@ object FPedido: TFPedido
         Size.PlatformDefault = False
         TabOrder = 33
         Visible = False
-        Viewport.Width = 343.000000000000000000
-        Viewport.Height = 32.000000000000000000
+        Viewport.Width = 335.000000000000000000
+        Viewport.Height = 24.000000000000000000
       end
       object EdUnidade: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -541,7 +540,7 @@ object FPedido: TFPedido
         end
       end
       object EdDtproducao: TDateEdit
-        Date = 46349.000000000000000000
+        Date = 46350.000000000000000000
         TodayDefault = True
         Hint = 'Data da produ'#231#227'o'
         Position.X = 7.000000000000000000
@@ -597,7 +596,7 @@ object FPedido: TFPedido
         RowHeight = 28.000000000000000000
         RowCount = 0
         Viewport.Width = 952.000000000000000000
-        Viewport.Height = 224.000000000000000000
+        Viewport.Height = 192.000000000000000000
         object StringColumn7: TStringColumn
           Header = 'Codigo'
           HeaderSettings.TextSettings.WordWrap = False
@@ -631,7 +630,7 @@ object FPedido: TFPedido
         end
       end
       object EdData: TDateEdit
-        Date = 46349.000000000000000000
+        Date = 46350.000000000000000000
         TodayDefault = True
         Position.X = 12.000000000000000000
         Position.Y = 263.000000000000000000
@@ -711,8 +710,8 @@ object FPedido: TFPedido
         RowHeight = 41.000000000000000000
         Options = [ColumnResize, ColumnMove, ColLines, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
         OnSelectCell = sgpedidosSelectCell
-        Viewport.Width = 445.000000000000000000
-        Viewport.Height = 185.000000000000000000
+        Viewport.Width = 440.000000000000000000
+        Viewport.Height = 153.000000000000000000
         object Numero: TStringColumn
           Header = 'Numero'
           HeaderSettings.TextSettings.WordWrap = False
@@ -783,7 +782,7 @@ object FPedido: TFPedido
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 318.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -1322,8 +1321,8 @@ object FPedido: TFPedido
         Size.Height = 74.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 99
-        Viewport.Width = 354.000000000000000000
-        Viewport.Height = 74.000000000000000000
+        Viewport.Width = 346.000000000000000000
+        Viewport.Height = 66.000000000000000000
       end
     end
     object PathAnimation1: TPathAnimation

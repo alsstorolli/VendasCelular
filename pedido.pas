@@ -14,7 +14,7 @@ uses
   FMX.EditBox, FMX.NumberBox, FMX.DateTimeCtrls, DateUtils, FMX.Grid.Style,
   FMX.ScrollBox, FMX.Ani,System.JSON, REST.Types, REST.Client,
   Data.Bind.ObjectScope, FMX.Memo, FMX.Memo.Types,  idftpcommon,
-  RESTRequest4D;
+  RESTRequest4D, FMX.ListBox, produtos2, FMX.Objects;
 
 type
   TFPedido = class(TForm)
@@ -136,8 +136,10 @@ type
     sbimportacondicao: TSpeedButton;
     EdPortaFtp: TEdit;
     bgerapdf: TCornerButton;
+    benviapedido: TCornerButton;
+    Rectangle1: TRectangle;
     sbimportahistmestre: TSpeedButton;
-    Memomsg: TMemo;
+    Memomsg: TListBox;
     procedure sbclientesClick(Sender: TObject);
     procedure sbimpclientesClick(Sender: TObject);
     procedure cbClick(Sender: TObject);
@@ -193,6 +195,7 @@ type
     procedure sbimpprodutosapiClick(Sender: TObject);
     procedure sbimportacondicaoClick(Sender: TObject);
     procedure bgerapdfClick(Sender: TObject);
+    procedure benviapedidoClick(Sender: TObject);
     procedure sbimportahistmestreClick(Sender: TObject);
   private
     { Private declarations }
@@ -225,12 +228,14 @@ type
 // 20.12.24
     procedure BaixaApicondicao;
     procedure IncluiCondicao(cjson:string);
-// 11.11.26 - porca
+// 14.01.25
+    function TiraBarra(s: string ;  caracter:string='/';caracternolugar:string='' ): string;
+// 13.10.25
+    procedure gravaonliney;
+// 16.11.26 - porca e 'de novo' 25.11.26
     procedure BaixaHistoricoPedidos;
     procedure IncluiHistPedidosMestre(cjson:string);
     procedure IncluiHistPedidosDetalhe(cjson:string);
-// 14.01.25
-    function TiraBarra(s: string ;  caracter:string='/';caracternolugar:string='' ): string;
 
 end;
 
@@ -251,6 +256,7 @@ var
   sqldetalhe      :string;
 
 const xunidade : string = '001';
+//////porta : string = '9000';  // depois usa da configuracao
 const colcodigo=0;colnome=1;colunidade=2;colqtde=3;colvenda=4;coltotalitem=5;coldesconto=6;
       coldataproducao=7;
 
@@ -258,9 +264,14 @@ implementation
 
 uses datam,clientes,produtos, portadores, condicao, Produtos1,FMX.VirtualKeyboard, FMX.Platform,
      pedevalores,classeportadores, System.Generics.Collections,classeclientes,classeprodutos,
-     classecondicao, gerapdfpedidovenda,classepedidomestre,classepedidodetalhe,clientes1,produtos2;
+     classecondicao, gerapdfpedidovenda, classepedidomestre,classepedidodetalhe,clientes1;
 
 {$R *.fmx}
+
+//{$R *.Moto360.fmx ANDROID}
+//{$R *.GGlass.fmx ANDROID}
+//{$R *.LgXhdpiPh.fmx ANDROID}
+//{$R *.NmXhdpiPh.fmx ANDROID}
 
 //{$R *.LgXhdpiTb.fmx ANDROID}
 //{$R *.SmXhdpiPh.fmx ANDROID}
@@ -295,7 +306,7 @@ begin
       sg.Cells[coldesconto,linhaatual]:='';
       sg.Cells[coldataproducao,linhaatual]:='';
       sg.Repaint;
-      EdValorPedido.Text:=FormatCurr('###,###.##',SomaGrid);
+      EdValorPedido.Text:='R$'+FormatCurr('###,###.##',SomaGrid);
       EdValorPedido.UpdateEffects;
 
 
@@ -316,6 +327,63 @@ end;
 procedure TFPedido.batualizaClick(Sender: TObject);
 begin
    TabItem3Click(self);
+end;
+
+// 13.10.25 - faz um request direto para o servidor do pedido escolhido
+procedure TFPedido.benviapedidoClick(Sender: TObject);
+///////////////////////////////////////////////////////
+var numero:integer;
+    xdata : TDatetime;
+begin
+
+    numero:=StrToIntDef(sgpedidos.Cells[0,linhaatualsgpedidos] ,0);
+    if numero=0 then exit;
+    xData:=StrToDate(sgpedidos.Cells[2,linhaatualsgpedidos]);
+
+//    ShowMessage('Lendo informações do Pedido');
+
+   dm.Q.Sql.Clear;
+   dm.Q.SQL.Add('select * from movped where mped_numerodoc='+IntToStr(numero)+
+                ' and mped_datamvto='+Datetosql(EdDAta.Date));
+   dm.Q.Open();
+   linha:='';
+   if  Dm.Q.Eof then begin
+       Showmessage('Pedido '+IntToStr(numero)+' não encontrado');
+       DM.Q.Close;
+       exit;
+   end;
+   if  Dm.Q.Fieldbyname('mped_status').AsString='U' then begin
+       Showmessage('Pedido '+IntToStr(numero)+' do histórico de pedidos');
+       DM.Q.Close;
+       exit;
+   end;
+
+   dm.QPed.Sql.Clear;
+   dm.QPed.SQL.Add('select * from movpeddet where mpdd_numerodoc='+IntToStr(numero)+
+                   ' and mpdd_datamvto='+Datetosql(EdDAta.Date));
+   dm.QPEd.Open();
+ {
+           AniIndicator2.Visible := true;
+           AniIndicator2.Enabled := true;
+//        TLoading.Show(Form1, 'Consultando...');
+        TThread.CreateAnonymousThread(procedure
+        begin
+
+                gravaonliney;
+                TThread.Synchronize(nil, procedure
+                begin
+//                        TLoading.Hide;
+                  AniIndicator2.Visible := false;
+                  AniIndicator2.Enabled := false;
+                  ShowMessage('Pedido Enviado');
+
+                end);
+
+        end).Start;
+        }
+    gravaonliney;
+    DM.Q.Close;
+    DM.QPed.Close;
 end;
 
 procedure TFPedido.benviapedidosClick(Sender: TObject);
@@ -600,6 +668,10 @@ var FGerapdf:TGerapdfpedidovenda;
     numero:integer;
     xData:TDatetime;
 begin
+//    showmessage('acessou geração pdf');
+
+//    numero:=StrToIntDef(sgpedidos.Cells[0,sgpedidos.Row] ,0);
+//    assim pega sempre a primeira linha do grid
     numero:=StrToIntDef(sgpedidos.Cells[0,linhaatualsgpedidos] ,0);
 
 //    showmessage('numero='+sgpedidos.Cells[0,linhaatualsgpedidos]);
@@ -705,8 +777,10 @@ begin
        dm.TabPedidosM.FieldByName('mped_dataemissao').AsDateTime:=date();
        dm.TabPedidosM.FieldByName('mped_tipo_codigo').AsInteger:=strtoint(EdCodcli.Text);
        dm.TabPedidosM.FieldByName('mped_tipomov').AsString:=Tipomov;
-       dm.TabPedidosM.FieldByName('mped_fpgt_codigo').AsString:=EdPortador.Text;
-       dm.TabPedidosM.FieldByName('mped_port_codigo').AsString:=Edcondicao.Text;
+       dm.TabPedidosM.FieldByName('mped_fpgt_codigo').AsString:=Edcondicao.Text;
+// 22.10.26
+       dm.TabPedidosM.FieldByName('mped_fpgt_prazos').AsString:=EdDescriaofpagto.Text;
+       dm.TabPedidosM.FieldByName('mped_port_codigo').AsString:=EdPortador.Text;
 //       dm.TabPedidosM.FieldByName('mped_vlrtotal').Ascurrency:=CurrencyparaGravar(Edvalorpedido.Text);
        try
 //          dm.TabPedidosM.FieldByName('mped_vlrtotal').Ascurrency:=strtocurr(Edvalorpedido.Text);
@@ -1176,15 +1250,15 @@ begin
 //                 .AddBody(cJson).Put;
       retorno:=LResponse.Content;
       if LResponse.StatusCode=200 then begin
-         Mensagem('incluindo produtos...',1000);
+         Mensagem('recebido ok da api,iniciar inclusão de produtos...',1000);
          IncluiProdutos(retorno);
       end else
          Mensagem('retorno api='+IntToSTR(LResponse.StatusCode)+'-'+copy(retorno,1,2000),2000);
+
 end;
 
-// 11.11.26
 procedure TFPedido.BaixaHistoricoPedidos;
-//////////////////////////////////////////
+////////////////////////////////////////////
 var ipservidor:string;
     retorno : string;
     LResponse:IResponse;
@@ -1257,6 +1331,8 @@ begin
   Lista:=TStringList.Create;
   if not dm.conexao.Connected then dm.conexao.Connected:=true;
   dm.conexao.GetTableNames('', '', '', Lista );
+  Memomsg.Clear;
+
   mensagem('checando tabela config em '+inttostr(lista.Count)+' tabelas');
   if Lista.IndexOf('config')<>-1 then begin
 
@@ -1307,6 +1383,7 @@ begin
     dm.Q.Close;
   end;
   sqldetalhe:='';
+
 end;
 
 function TFPedido.FormataData(data: TDatetime; ano: boolean): string;
@@ -1438,6 +1515,103 @@ begin
 
 end;
 
+procedure TFPedido.gravaonliney;
+//////////////////////////////////////////////////////////
+var i       : integer;
+    qtdec,
+    vendac,
+    codprod,
+    retorno,
+    ipservidor,
+    vlrtotal  : string;
+    Corpo,
+    Corpod1  : TJsonObject;
+    CorpoItens: TJSONArray;
+    LResponse:IResponse;
+
+begin
+
+    begin
+
+       Corpo   := TJsonObject.Create;
+       CorpoItens := TJsonArray.Create;
+//            Dm.Q.FieldByName('mped_tipomov').AsString+';'+
+//            Dm.Q.FieldByName('mped_contatopedido').AsString;
+
+       Corpo.AddPair('mped_unid_codigo',xunidade);
+       Corpo.AddPair('mped_numerodoc',Dm.Q.FieldByName('mped_numerodoc').AsString);
+       Corpo.AddPair('mped_tipo_codigo',Dm.Q.FieldByName('mped_tipo_codigo').AsString);
+//           Corpo.AddPair('mped_datamvto',DateTimeToStr( Date() ) );
+//           Corpo.AddPair('mped_datamvto',DateToSql( Date() ) );
+       Corpo.AddPair('mped_datamvto',FormataDataJson(Dm.Q.FieldByName('mped_datamvto').AsDatetime,true ) );
+//       Corpo.AddPair('mped_vlrtotal',Dm.Q.FieldByName('mped_vlrtotal').AsString );
+//       Corpo.AddPair('mped_vlrtotal',FormatFloat('0.00',Dm.Q.FieldByName('mped_vlrtotal').AsCurrency) );
+       vlrtotal:=Dm.Q.FieldByName('mped_vlrtotal').AsString;
+       vlrtotal:=vlrtotal.Replace(',','.');
+
+       Corpo.AddPair('mped_vlrtotal',vlrtotal);
+       Corpo.AddPair('mped_fpgt_codigo',Dm.Q.FieldByName('mped_fpgt_codigo').AsString);
+       Corpo.AddPair('mped_port_codigo',Dm.Q.FieldByName('mped_port_codigo').AsString);
+       Corpo.AddPair('mped_tipomov',Dm.Q.FieldByName('mped_tipomov').AsString);
+
+//       ShowMessage('Montado objeto pedido mestre para o Request para '+ipservidor+' porta '+EdPorta.Text);
+
+       dm.QCampo.SQL.Clear;
+       dm.QCampo.SQL.Add('select fpgt_prazos from fpgto where fpgt_codigo = '''+Dm.Q.FieldByName('mped_fpgt_codigo').AsString+'''');
+       dm.QCampo.Open();
+       Corpo.AddPair('mped_fpgt_prazos',DM.QCampo.FieldByName('fpgt_prazos').AsString);
+
+       while not Dm.QPed.Eof do begin
+
+          codprod := Dm.QPed.FieldByName('mpdd_tipo_codigo').AsString;
+          if trim(codprod) <> '' then begin
+
+             qtdec  := Dm.QPed.FieldByName('mpdd_qtde').AsString;
+             qtdec  := qtdec.Replace(',','.');
+             vendac := Dm.QPed.FieldByName('mpdd_venda').AsString;
+             vendac := vendac.Replace(',','.');
+             CorpoD1 := TJSONObject.Create;;
+             Corpod1.AddPair('mpdd_unid_codigo',xunidade);
+             Corpod1.AddPair('mpdd_numerodoc',Dm.QPed.FieldByName('mpdd_numerodoc').AsString);
+             Corpod1.AddPair('mpdd_tipo_codigo',Dm.QPed.FieldByName('mpdd_tipo_codigo').AsString);
+             Corpod1.AddPair('mpdd_esto_codigo',Dm.QPed.FieldByName('mpdd_esto_codigo').AsString);
+             Corpod1.AddPair('mpdd_qtde',qtdec);
+             Corpod1.AddPair('mpdd_venda',vendac);
+             CorpoItens.Add(Corpod1);
+
+          end;
+          Dm.QPed.Next;
+       end;
+//       Corpod1.Free;
+       Corpo.AddPair('Itens',CorpoItens);
+
+       if cb.IsChecked then ipservidor:=Edenderecoftplocal.text
+       else ipservidor:=Edenderecoftp.text;
+
+//       ShowMessage('Corpo:'+corpo.ToString);
+
+       LResponse:=TRequest.New.BaseURL( 'http://'+ipservidor+':'+Edporta.text+'/pedido')
+             .Accept('application/json')
+//                 .Token('Bearer '+FToken)
+             .AddBody(corpo)
+             .Post;
+
+//       ShowMessage('Depois do Request para '+ipservidor+' porta '+EdPorta.Text);
+
+       retorno:=LResponse.Content;
+       if LResponse.StatusCode=200 then begin
+           ShowMessage(Retorno);
+       end else
+           ShowMessage('retorno api='+IntToSTR(LResponse.StatusCode)+'-'+copy(retorno,1,2000));
+
+       Dm.Q.Close;
+       Dm.QPed.Close;
+       dm.QCampo.Close;
+
+    end;
+
+end;
+
 // 02.09.24
 procedure TFPedido.IncluiClientes(cjson: string);
 /////////////////////////////////////////////////
@@ -1461,6 +1635,7 @@ begin
       Clientes.Clie_Razaosocial:=(portadoresApi[p].GetValue<string>('clie_razaosocial'));
       Clientes.Clie_Cidade:=(portadoresApi[p].GetValue<string>('clie_cidade'));
       Clientes.Clie_Cnpjcpf:=(portadoresApi[p].GetValue<string>('clie_cnpjcpf'));
+//      Clientes.Clie_Uf:=(portadoresApi[p].GetValue<string>('clie_uf'));
       ListaClientes.Add(Clientes);
     end;
     if ListaClientes.Count>0 then begin
@@ -1480,10 +1655,6 @@ begin
          dm.TabClientes.FieldByName('clie_razaosocial').asstring:=Listaclientes[p].Clie_Razaosocial;
          dm.TabClientes.FieldByName('clie_cidade').asstring:=Listaclientes[p].Clie_Cidade;
          dm.TabClientes.FieldByName('clie_cnpjcpf').asstring:=Listaclientes[p].Clie_Cnpjcpf;
-         if length(Trim(Listaclientes[p].Clie_Cnpjcpf))=11 then
-            dm.TabClientes.FieldByName('clie_tipo').asstring:='F'
-         else
-            dm.TabClientes.FieldByName('clie_tipo').asstring:='J';
          dm.TabClientes.Post;
        end;
        if (ListaClientes.Count>0) then begin
@@ -1547,7 +1718,6 @@ begin
     Dm.TabFpgto.Close();
 end;
 
-// 11.11.26
 procedure TFPedido.IncluiHistPedidosDetalhe(cjson: string);
 ///////////////////////////////////////////////////////////
 var obj:TJSONObject;
@@ -1785,26 +1955,27 @@ var obj:TJSONObject;
     p:integer;
 begin
 
-    mensagem('parse no '+copy(cjson,1,2000)+' montando obj');
+//    mensagem('parse no '+copy(cjson,1,2000)+' montando obj');
     obj := TJsonObject.ParseJSONValue(TEncoding.UTF8.GetBytes(cjson), 0) as TJSONObject;
-    mensagem('formando array de Produtos');
+    mensagem('criado lista de Produtos');
     portadoresApi := obj.GetValue<TJSONArray>('produtos');
     ListaProdutos:=TObjectList<TProdutos>.Create;
-    for p := 0 to portadoresApi.Count - 1 do begin
-      Produtos:=TProdutos.Create;
-      Produtos.Esto_Codigo:=portadoresApi[p].GetValue<string>('esto_codigo');
-      Produtos.Esto_Descricao:=(portadoresApi[p].GetValue<string>('esto_descricao'));
-      Produtos.Esto_Descricao:=TiraBarra(Produtos.Esto_Descricao,'"','');
-      Produtos.Esto_Unidade:=(portadoresApi[p].GetValue<string>('esto_unidade'));
-      Produtos.Esto_Imagem:=(portadoresApi[p].GetValue<string>('esto_imagem'));
-      Produtos.Esto_Desconto:=(portadoresApi[p].GetValue<Double>('esto_desconto'));
-//      Produtos.Esqt_Qtde:=(portadoresApi[p].GetValue<Double>('esqt_qtde'));
-      Produtos.Esqt_Qtde:=StrToFloat(portadoresApi[p].GetValue<String>('esqt_qtde'));
-//      Produtos.Esqt_Vendavis:=(portadoresApi[p].GetValue<Double>('esqt_vendavis'));
-      Produtos.Esqt_Vendavis:=StrToFloat(portadoresApi[p].GetValue<String>('esqt_vendavis'));
-//      mensagem('percorrendo array de Produtos '+Produtos.Esto_Codigo);
-      ListaProdutos.Add(Produtos);
-    end;
+      for p := 0 to portadoresApi.Size - 1 do begin
+        Produtos:=TProdutos.Create;
+        Produtos.Esto_Codigo:=portadoresApi[p].GetValue<string>('esto_codigo');
+        Produtos.Esto_Descricao:=(portadoresApi[p].GetValue<string>('esto_descricao'));
+        Produtos.Esto_Descricao:=TiraBarra(Produtos.Esto_Descricao,'"','');
+        Produtos.Esto_Unidade:=(portadoresApi[p].GetValue<string>('esto_unidade'));
+//        Produtos.Esto_Imagem:=(portadoresApi[p].GetValue<string>('esto_imagem'));
+// 16.10.26 - por enquanto retirado imagens
+        Produtos.Esto_Desconto:=(portadoresApi[p].GetValue<Double>('esto_desconto'));
+  //      Produtos.Esqt_Qtde:=(portadoresApi[p].GetValue<Double>('esqt_qtde'));
+        Produtos.Esqt_Qtde:=StrToFloat(portadoresApi[p].GetValue<String>('esqt_qtde'));
+  //      Produtos.Esqt_Vendavis:=(portadoresApi[p].GetValue<Double>('esqt_vendavis'));
+        Produtos.Esqt_Vendavis:=StrToFloat(portadoresApi[p].GetValue<String>('esqt_vendavis'));
+  //      mensagem('percorrendo array de Produtos '+Produtos.Esto_Codigo);
+        ListaProdutos.Add(Produtos);
+      end;
     if ListaProdutos.Count>0 then begin
        if not dm.conexao.Connected then dm.conexao.Connected:=true;
        mensagem('Apagando produtos do sistema');
@@ -1910,9 +2081,9 @@ begin
      lmens.Text:=xmens;
      Sleep( tempo );
    end else begin
-     Memomsg.Lines.Add(xmens);
-     Memomsg.SelStart := Length(Memomsg.Text);
-     Memomsg.SelLength := 0;
+//     Memomsg.Lines.Add(xmens);
+     Memomsg.Items.Add(xmens); // para tentar ler as msg quando importa
+     Memomsg.ItemIndex := Memomsg.Count - 1;
    end;
 end;
 
@@ -1920,6 +2091,8 @@ end;
 procedure TFPedido.sbimpclientesapiClick(Sender: TObject);
 ////////////////////////////////////////////////////////////
 begin
+// 24.10.26
+       if trim(EdSenha.text) <> '954854' then exit;
         AniIndicator1.Visible := true;
         AniIndicator1.Enabled := true;
         Mensagem('baixando clientes da api',1000);
@@ -2092,6 +2265,7 @@ end;
 
 procedure TFPedido.sbclientesClick(Sender: TObject);
 begin
+//  if FClientes=nil then Application.CreateForm(TFClientes,FClientes);
 //  if trim(EdCodcli.Text)<>'' then
 //     EdNome.Text:=FClientes.GetNome( EdCodcli.Text )
 //  else
@@ -2380,6 +2554,30 @@ begin
        mensagem('Criado campo conf_portaapi na tabela config');
 
      end;
+// 20.02.26  - devido a erro de overflow q no banco android tem so 40 posicoes....
+{ - retirado campos de QClientes e deixado somente os q aparece no grid...
+     if not TemCampo('clientes','clie_endres_ant') then begin
+
+       mensagem('Renomeando campo da tabela clientes');
+       dm.QEstru.SQL.Clear;
+       dm.QEstru.SQL.Add(' alter table clientes  rename column  clie_endres to clie_endres_ant');
+       dm.QEstru.ExecSQL;
+       dm.QEstru.Close;
+       mensagem('Criado campo clie_endres_ant na tabela clientes');
+
+       mensagem('Alterando Estrutura da tabela clientes');
+       dm.QEstru.SQL.Clear;
+//       dm.QEstru.SQL.Add('alter table clientes  add column  clie_endres char(60) ');
+       dm.QEstru.SQL.Add('alter table clientes  add column  clie_endres character varying(60)');
+       dm.QEstru.ExecSQL;
+       dm.QEstru.Close;
+       mensagem('Atualizando campo clie_endres na tabela clientes');
+       dm.QEstru.SQL.Clear;
+       dm.QEstru.SQL.Add('update clientes set clie_endres=clie_endres_ant');
+       dm.QEstru.ExecSQL;
+       dm.QEstru.Close;
+     end;
+}
 
    end;
 
@@ -2448,12 +2646,11 @@ begin
 end;
 
 procedure TFPedido.sbimportahistmestreClick(Sender: TObject);
-/////////////////////////////////////////////////////////////////
 begin
 //        AniIndicator1.Visible := true;
 //        AniIndicator1.Enabled := true;
-        Memomsg.Lines.Clear;
-        Mensagem('inicio baixa dos pedidos Mestre da api',1000,'S');
+        Memomsg.Items.Clear;
+        Mensagem('inicio baixa do histórico de pedidos da api',1000,'S');
 //{
         TThread.CreateAnonymousThread(procedure
         begin
@@ -2469,14 +2666,7 @@ begin
                 end);
 
         end).Start;
-//}
-// se for em thread dá msg 'duplicates not allowed'
-{
-        Mensagem('inicio SEM THREAD DA baixa dos produtos da api',1000);
-        BaixaHistoricoPedidos;
-        AniIndicator1.Visible := false;
-        AniIndicator1.Enabled := false;
-}
+
 end;
 
 procedure TFPedido.sbimportaprodutoClick(Sender: TObject);
@@ -2619,11 +2809,12 @@ end;
 
 procedure TFPedido.sbimpprodutosapiClick(Sender: TObject);
 begin
-
+// 24.10.26
+     if trim(EdSenha.text) <> '954854' then exit;
 //        AniIndicator1.Visible := true;
 //        AniIndicator1.Enabled := true;
-        Mensagem('inicio baixa dos produtos da api',1000);
-//{
+        Mensagem('inicio baixa dos produtos da api',000);
+
         TThread.CreateAnonymousThread(procedure
         begin
 
@@ -2641,8 +2832,10 @@ begin
 //}
 // se for em thread dá msg 'duplicates not allowed'
 {
+        Listbox1.Items.BeginUpdate;
         Mensagem('inicio SEM THREAD DA baixa dos produtos da api',1000);
         BaixaApiProdutos;
+        Listbox1.Items.endUpdate;
         AniIndicator1.Visible := false;
         AniIndicator1.Enabled := false;
 }
@@ -2666,7 +2859,6 @@ end;
 procedure TFPedido.sbportadorClick(Sender: TObject);
 begin
   FPortadores.Show;
-
 end;
 
 procedure TFPedido.sbportadoresClick(Sender: TObject);
@@ -2786,12 +2978,16 @@ end;
 
 procedure TFPedido.sbprodutosClick(Sender: TObject);
 begin
+
+  FProdutos2.Show;
+
 //  FProdutos.Show;
+
 //  FProdutos1.Execute;
 //  FProdutos1.ExecuteX;
-  FProdutos2.Show;
   EdInicial.text:='';
   EdFinal.text:='';
+
 end;
 
 procedure TFPedido.sbsalvaonfigClick(Sender: TObject);
@@ -3068,6 +3264,7 @@ begin
 // 14.02.18
   NumPedido:=0;
   label1.text:='INCLUSÃO';
+//  Memomsg.Visible:=false;
 
   if Sender is TEdit then begin
 
@@ -3087,6 +3284,11 @@ begin
                      sqlnumpedido+
                      ' order by mped_datamvto' );
         dm.Q.Open();
+        if  Dm.Q.Fieldbyname('mped_status').AsString='U' then begin
+           Showmessage('Pedido '+IntToStr(numpedido)+' do histórico de pedidos');
+           Dm.Q.Close;
+           exit;
+        end;
 
         label1.text:='ALTERAÇÃO';
         label1.UpdateEffects;
@@ -3149,6 +3351,7 @@ end;
 procedure TFPedido.TabItem2Click(Sender: TObject);
 begin
    EdAtedata.Text:=Datetostr(Date()-30);
+//   Memomsg.Visible:=true;
 end;
 
 procedure TFPedido.TabItem3Click(Sender: TObject);
@@ -3169,7 +3372,7 @@ begin
   sqlcliente:='';sqldetalhe:='';
   if Sender is TEdit then begin
     if trim(TEdit(Sender).Text)<>'' then begin
-      sqlcliente:=' where mped_tipo_codigo = '+(TEdit(Sender).Text)+' and mped_status = ''U''';
+      sqlcliente:=' where mped_tipo_codigo = '+(TEdit(Sender).Text);
       sqldetalhe:=' and mpdd_status = ''U''';
       ultimos:='S';
     end;
@@ -3177,7 +3380,7 @@ begin
 
   dm.Q.SQL.Add('select movped.*,clie_nome from movped inner join clientes on ( clie_codigo=mped_tipo_codigo )'+
                sqlcliente+
-               ' order by mped_datamvto desc' );
+               ' order by mped_datamvto' );
   dm.Q.Open();
 
  // sgpedidos.RowCount:=1;
@@ -3192,7 +3395,7 @@ begin
   end;
 
 //  showmessage( 'limpou grid' );
-
+//  Memomsg.Visible:=false;
   xtot:=0;p:=0;
   sgpedidos.RowCount:=1;
   while not dm.q.eof do begin

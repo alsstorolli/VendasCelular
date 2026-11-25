@@ -2,7 +2,7 @@ object FPedido: TFPedido
   Left = 0
   Top = 0
   Caption = 'Pedido de Venda'
-  ClientHeight = 699
+  ClientHeight = 752
   ClientWidth = 952
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -13,25 +13,25 @@ object FPedido: TFPedido
     Align = Client
     FullSize = True
     Size.Width = 952.000000000000000000
-    Size.Height = 699.000000000000000000
+    Size.Height = 752.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     TabPosition = Bottom
     Sizes = (
       952s
-      650s
+      703s
       952s
-      650s
+      703s
       952s
-      650s)
+      703s)
     object TabItem1: TTabItem
       CustomIcon = <
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 317.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -41,11 +41,19 @@ object FPedido: TFPedido
       OnClick = TabItem1Click
       ExplicitSize.cx = 317.000000000000000000
       ExplicitSize.cy = 49.000000000000000000
+      object Rectangle1: TRectangle
+        Fill.Color = claCornsilk
+        Position.X = 4.000000000000000000
+        Position.Y = 177.000000000000000000
+        Size.Width = 258.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+      end
       object sg: TStringGrid
         Align = Bottom
         CanFocus = True
         ClipChildren = True
-        Position.Y = 386.000000000000000000
+        Position.Y = 439.000000000000000000
         Size.Width = 952.000000000000000000
         Size.Height = 264.000000000000000000
         Size.PlatformDefault = False
@@ -99,7 +107,7 @@ object FPedido: TFPedido
       end
       object EdCodcli: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 7
+        TabOrder = 10
         KeyboardType = NumberPad
         TextSettings.Font.Size = 20.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -113,7 +121,7 @@ object FPedido: TFPedido
       end
       object EdNome: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 8
+        TabOrder = 11
         TextSettings.Font.Size = 20.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         Position.X = 86.000000000000000000
@@ -127,8 +135,8 @@ object FPedido: TFPedido
       end
       object sbclientes: TSpeedButton
         IconTintColor = claSeagreen
-        Position.X = 326.000000000000000000
-        Position.Y = 41.000000000000000000
+        Position.X = 317.000000000000000000
+        Position.Y = 42.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -139,7 +147,7 @@ object FPedido: TFPedido
       end
       object Edcodpro: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 2
+        TabOrder = 5
         TextSettings.Font.Size = 20.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         Position.X = 3.000000000000000000
@@ -153,7 +161,7 @@ object FPedido: TFPedido
       end
       object Eddescricao: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 6
+        TabOrder = 9
         TextSettings.Font.Size = 20.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         Position.X = 87.000000000000000000
@@ -167,8 +175,8 @@ object FPedido: TFPedido
       end
       object sbprodutos: TSpeedButton
         IconTintColor = claSeagreen
-        Position.X = 327.000000000000000000
-        Position.Y = 85.000000000000000000
+        Position.X = 320.000000000000000000
+        Position.Y = 89.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -179,26 +187,27 @@ object FPedido: TFPedido
       end
       object label3: TLabel
         StyledSettings = [Family]
-        Position.X = 102.000000000000000000
-        Position.Y = 314.000000000000000000
-        Size.Width = 126.000000000000000000
-        Size.Height = 49.000000000000000000
+        Position.X = 7.000000000000000000
+        Position.Y = 180.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 45.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 22.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         TextSettings.FontColor = claGreen
+        TextSettings.WordWrap = False
         TextSettings.Trimming = None
         Text = 'Valor Pedido'
-        TabOrder = 11
+        TabOrder = 14
       end
       object sbconfirma: TSpeedButton
         StyledSettings = [Family]
         Hint = 'Confirma inclus'#227'o do item no pedido'
         ModalResult = 1
-        Position.X = 260.000000000000000000
-        Position.Y = 125.000000000000000000
+        Position.X = 265.000000000000000000
+        Position.Y = 178.000000000000000000
         Size.Width = 95.000000000000000000
-        Size.Height = 37.000000000000000000
+        Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'buttonstyle'
         Text = 'Confirma item'
@@ -211,26 +220,26 @@ object FPedido: TFPedido
       end
       object Edportador: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 14
+        TabOrder = 17
         Position.X = 6.000000000000000000
-        Position.Y = 170.000000000000000000
+        Position.Y = 360.000000000000000000
         Size.Width = 53.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
       end
       object labelportador: TLabel
-        Position.X = 475.000000000000000000
-        Position.Y = 68.000000000000000000
+        Position.X = 370.000000000000000000
+        Position.Y = 77.000000000000000000
         Size.Width = 127.000000000000000000
-        Size.Height = 31.000000000000000000
+        Size.Height = 47.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Trimming = None
-        TabOrder = 15
+        TabOrder = 18
       end
       object sbportador: TSpeedButton
         IconTintColor = claSeagreen
         Position.X = 141.000000000000000000
-        Position.Y = 165.000000000000000000
+        Position.Y = 355.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -239,18 +248,18 @@ object FPedido: TFPedido
         OnClick = sbportadorClick
       end
       object labelcondicao: TLabel
-        Position.X = 526.000000000000000000
-        Position.Y = 122.000000000000000000
+        Position.X = 368.000000000000000000
+        Position.Y = 139.000000000000000000
         Size.Width = 117.000000000000000000
-        Size.Height = 33.000000000000000000
+        Size.Height = 42.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Trimming = None
-        TabOrder = 17
+        TabOrder = 20
       end
       object sbcondicao: TSpeedButton
         IconTintColor = claSeagreen
-        Position.X = 325.000000000000000000
-        Position.Y = 165.000000000000000000
+        Position.X = 322.000000000000000000
+        Position.Y = 355.000000000000000000
         Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -260,9 +269,9 @@ object FPedido: TFPedido
       end
       object Edcondicao: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 13
+        TabOrder = 16
         Position.X = 189.000000000000000000
-        Position.Y = 170.000000000000000000
+        Position.Y = 360.000000000000000000
         Size.Width = 40.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
@@ -270,12 +279,12 @@ object FPedido: TFPedido
       object bgravar: TCornerButton
         StyledSettings = [Family]
         Position.X = 154.000000000000000000
-        Position.Y = 245.000000000000000000
+        Position.Y = 260.000000000000000000
         Sides = [Top, Left, Bottom, Right]
         Size.Width = 129.000000000000000000
-        Size.Height = 35.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 20
+        TabOrder = 23
         Text = 'Grava Pedido'
         TextSettings.Font.Size = 18.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -287,13 +296,13 @@ object FPedido: TFPedido
       end
       object bapagaitem: TCornerButton
         StyledSettings = [Family, Style, FontColor]
-        Position.X = 290.000000000000000000
-        Position.Y = 243.000000000000000000
+        Position.X = 291.000000000000000000
+        Position.Y = 260.000000000000000000
         Sides = [Top, Left, Bottom, Right]
         Size.Width = 65.000000000000000000
-        Size.Height = 36.000000000000000000
+        Size.Height = 41.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 21
+        TabOrder = 24
         Text = 'Apagar'
         TextSettings.Font.Size = 14.000000000000000000
         TextSettings.Trimming = None
@@ -304,7 +313,7 @@ object FPedido: TFPedido
       object EdQtde: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         OnTap = EdQtdeTap
-        TabOrder = 22
+        TabOrder = 25
         KeyboardType = NumbersAndPunctuation
         Position.X = 7.000000000000000000
         Position.Y = 130.000000000000000000
@@ -315,7 +324,7 @@ object FPedido: TFPedido
       end
       object EdUnitario: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 25
+        TabOrder = 28
         KeyboardType = NumbersAndPunctuation
         Position.X = 191.000000000000000000
         Position.Y = 129.000000000000000000
@@ -328,7 +337,7 @@ object FPedido: TFPedido
         Size.Width = 952.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 26
+        TabOrder = 29
         TintColor = claSeagreen
         object labelversao: TLabel
           StyledSettings = [Family, Size, Style]
@@ -339,18 +348,18 @@ object FPedido: TFPedido
           Size.PlatformDefault = False
           TextSettings.FontColor = claSnow
           TextSettings.Trimming = None
-          Text = 'Vendas Sac Vers'#227'o 2.2 - Celular'
+          Text = 'Vendas Sac Vers'#227'o 2.4b - Celular'
         end
       end
       object CornerButton1: TCornerButton
         StyledSettings = [Family]
         Position.X = 4.000000000000000000
-        Position.Y = 243.000000000000000000
+        Position.Y = 259.000000000000000000
         Sides = [Top, Left, Bottom, Right]
         Size.Width = 142.000000000000000000
-        Size.Height = 36.000000000000000000
+        Size.Height = 41.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 19
+        TabOrder = 22
         Text = 'Ultimos Pedidos'
         TextSettings.Font.Size = 18.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -362,8 +371,8 @@ object FPedido: TFPedido
       end
       object Label1: TLabel
         StyledSettings = [Family, FontColor]
-        Position.X = 537.000000000000000000
-        Position.Y = 158.000000000000000000
+        Position.X = 368.000000000000000000
+        Position.Y = 184.000000000000000000
         Size.Width = 127.000000000000000000
         Size.Height = 23.000000000000000000
         Size.PlatformDefault = False
@@ -371,43 +380,43 @@ object FPedido: TFPedido
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         TextSettings.Trimming = None
         Text = 'INCLUS'#195'O'
-        TabOrder = 27
+        TabOrder = 30
       end
       object rbvenda: TRadioButton
         IsChecked = True
         Position.X = 5.000000000000000000
-        Position.Y = 287.000000000000000000
+        Position.Y = 315.000000000000000000
         Size.Width = 76.000000000000000000
         Size.Height = 19.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 30
+        TabOrder = 33
         Text = 'Venda'
       end
       object rbbonificacao: TRadioButton
         Position.X = 78.000000000000000000
-        Position.Y = 288.000000000000000000
+        Position.Y = 315.000000000000000000
         Size.Width = 114.000000000000000000
         Size.Height = 19.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 29
+        TabOrder = 32
         Text = 'Bonifica'#231#227'o'
       end
       object rbcomodato: TRadioButton
         Position.X = 192.000000000000000000
-        Position.Y = 287.000000000000000000
+        Position.Y = 315.000000000000000000
         Size.Width = 107.000000000000000000
         Size.Height = 19.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 28
+        TabOrder = 31
         Text = 'Comodato'
       end
       object EdDescricaoPortador: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 5
+        TabOrder = 8
         TextSettings.Font.Size = 20.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         Position.X = 50.000000000000000000
-        Position.Y = 170.000000000000000000
+        Position.Y = 360.000000000000000000
         Enabled = False
         Size.Width = 93.000000000000000000
         Size.Height = 32.000000000000000000
@@ -417,11 +426,11 @@ object FPedido: TFPedido
       end
       object EdDescriaofpagto: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 4
+        TabOrder = 7
         TextSettings.Font.Size = 20.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         Position.X = 232.000000000000000000
-        Position.Y = 170.000000000000000000
+        Position.Y = 360.000000000000000000
         Enabled = False
         Size.Width = 93.000000000000000000
         Size.Height = 32.000000000000000000
@@ -431,7 +440,7 @@ object FPedido: TFPedido
       end
       object EdDesconto: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 24
+        TabOrder = 27
         KeyboardType = NumbersAndPunctuation
         Position.X = 118.000000000000000000
         Position.Y = 129.000000000000000000
@@ -442,7 +451,7 @@ object FPedido: TFPedido
       end
       object EdDescontomaximo: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 23
+        TabOrder = 26
         KeyboardType = NumbersAndPunctuation
         Position.X = 122.000000000000000000
         Position.Y = 210.000000000000000000
@@ -455,16 +464,17 @@ object FPedido: TFPedido
       end
       object EdValorPedido: TLabel
         StyledSettings = [Family]
-        Position.X = 236.000000000000000000
-        Position.Y = 310.000000000000000000
-        Size.Width = 121.000000000000000000
-        Size.Height = 46.000000000000000000
+        Position.X = 141.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 113.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 23.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         TextSettings.FontColor = claGreen
+        TextSettings.HorzAlign = Trailing
         TextSettings.Trimming = None
-        TabOrder = 31
+        TabOrder = 34
       end
       object AniIndicator2: TAniIndicator
         Position.X = 249.000000000000000000
@@ -478,18 +488,18 @@ object FPedido: TFPedido
         Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
         DataDetectorTypes = []
         Position.X = 10.000000000000000000
-        Position.Y = 211.000000000000000000
+        Position.Y = 234.000000000000000000
         Size.Width = 343.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 33
+        TabOrder = 36
         Visible = False
         Viewport.Width = 335.000000000000000000
         Viewport.Height = 24.000000000000000000
       end
       object EdUnidade: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 34
+        TabOrder = 37
         Position.X = 8.000000000000000000
         Position.Y = 152.000000000000000000
         Enabled = False
@@ -499,12 +509,12 @@ object FPedido: TFPedido
         Visible = False
       end
       object Pvalores: TPanel
-        Position.X = 269.000000000000000000
-        Position.Y = 206.000000000000000000
+        Position.X = 277.000000000000000000
+        Position.Y = 226.000000000000000000
         Size.Width = 182.000000000000000000
         Size.Height = 33.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 35
+        TabOrder = 38
         object EdInicial: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           TabOrder = 0
@@ -540,17 +550,19 @@ object FPedido: TFPedido
         end
       end
       object EdDtproducao: TDateEdit
-        Date = 46350.000000000000000000
+        Date = 46351.000000000000000000
         TodayDefault = True
+        Enabled = False
         Hint = 'Data da produ'#231#227'o'
-        Position.X = 7.000000000000000000
-        Position.Y = 210.000000000000000000
+        Position.X = 6.000000000000000000
+        Position.Y = 234.000000000000000000
         Size.Width = 127.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
         StyledSettings = [Family, Style, FontColor]
-        TabOrder = 3
+        TabOrder = 6
         TextSettings.Font.Size = 20.000000000000000000
+        Visible = False
       end
       object Edpedidocli: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -558,13 +570,15 @@ object FPedido: TFPedido
         MaxLength = 15
         TextSettings.Font.Size = 20.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
-        Position.X = 154.000000000000000000
-        Position.Y = 211.000000000000000000
+        Position.X = 153.000000000000000000
+        Position.Y = 235.000000000000000000
+        Enabled = False
         Size.Width = 142.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'Pedido'
         StyledSettings = [Family, FontColor]
+        Visible = False
       end
     end
     object TabItem3: TTabItem
@@ -586,7 +600,7 @@ object FPedido: TFPedido
         Align = Bottom
         CanFocus = True
         ClipChildren = True
-        Position.Y = 426.000000000000000000
+        Position.Y = 479.000000000000000000
         Size.Width = 952.000000000000000000
         Size.Height = 224.000000000000000000
         Size.PlatformDefault = False
@@ -630,10 +644,10 @@ object FPedido: TFPedido
         end
       end
       object EdData: TDateEdit
-        Date = 46350.000000000000000000
+        Date = 46351.000000000000000000
         TodayDefault = True
-        Position.X = 12.000000000000000000
-        Position.Y = 263.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 289.000000000000000000
         Size.Width = 153.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
@@ -644,10 +658,10 @@ object FPedido: TFPedido
       object batualiza: TCornerButton
         StyledSettings = [Family, Style]
         Position.X = 3.000000000000000000
-        Position.Y = 194.000000000000000000
+        Position.Y = 196.000000000000000000
         Sides = [Top, Left, Bottom, Right]
-        Size.Width = 81.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Width = 87.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 4
         Text = 'Atualiza'
@@ -660,25 +674,26 @@ object FPedido: TFPedido
       end
       object benviapedidos: TCornerButton
         StyledSettings = [Family]
-        Position.X = 197.000000000000000000
-        Position.Y = 194.000000000000000000
+        Position.X = 102.000000000000000000
+        Position.Y = 196.000000000000000000
         Sides = [Top, Left, Bottom, Right]
-        Size.Width = 94.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Width = 118.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 6
-        Text = 'Envia Ped.'
+        TabOrder = 7
+        Text = 'Envia Pedidos'
         TextSettings.Font.Size = 17.000000000000000000
         TextSettings.Font.StyleExt = {00040000000200000004000000}
         TextSettings.FontColor = claRoyalblue
         TextSettings.Trimming = None
+        Visible = False
         XRadius = 3.000000000000000000
         YRadius = 3.000000000000000000
         OnClick = benviapedidosClick
       end
       object Edtotalpedidos: TNumberBox
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 10
+        TabOrder = 11
         Cursor = crIBeam
         Max = 10000.000000000000000000
         ValueType = Float
@@ -688,7 +703,7 @@ object FPedido: TFPedido
         TextSettings.FontColor = claMediumblue
         TextSettings.HorzAlign = Trailing
         Position.X = 241.000000000000000000
-        Position.Y = 246.000000000000000000
+        Position.Y = 289.000000000000000000
         Size.Width = 100.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
@@ -706,7 +721,7 @@ object FPedido: TFPedido
         TextSettings.Font.Size = 20.000000000000000000
         TextSettings.FontColor = claRoyalblue
         StyledSettings = [Family, Style]
-        TabOrder = 11
+        TabOrder = 12
         RowHeight = 41.000000000000000000
         Options = [ColumnResize, ColumnMove, ColLines, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
         OnSelectCell = sgpedidosSelectCell
@@ -734,14 +749,14 @@ object FPedido: TFPedido
       end
       object cbalterapedido: TCornerButton
         StyledSettings = [Family, Style]
-        Position.X = 82.000000000000000000
-        Position.Y = 194.000000000000000000
+        Position.X = 234.000000000000000000
+        Position.Y = 196.000000000000000000
         Sides = [Top, Left, Bottom, Right]
-        Size.Width = 116.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Width = 108.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 3
-        Text = 'Altera Pedido'
+        Text = 'Alt. Pedido'
         TextSettings.Font.Size = 18.000000000000000000
         TextSettings.FontColor = claSeagreen
         TextSettings.Trimming = None
@@ -751,7 +766,7 @@ object FPedido: TFPedido
       end
       object EdNumPedido: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 12
+        TabOrder = 13
         Text = 'Pedido'
         Position.X = 616.000000000000000000
         Position.Y = 184.000000000000000000
@@ -760,14 +775,14 @@ object FPedido: TFPedido
       end
       object bgerapdf: TCornerButton
         StyledSettings = [Family]
-        Position.X = 290.000000000000000000
-        Position.Y = 194.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 242.000000000000000000
         Sides = [Top, Left, Bottom, Right]
-        Size.Width = 51.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Width = 85.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 5
-        Text = 'PDF'
+        TabOrder = 6
+        Text = 'Gera PDF'
         TextSettings.Font.Size = 17.000000000000000000
         TextSettings.Font.StyleExt = {00040000000200000004000000}
         TextSettings.FontColor = claRoyalblue
@@ -776,13 +791,31 @@ object FPedido: TFPedido
         YRadius = 3.000000000000000000
         OnClick = bgerapdfClick
       end
+      object benviapedido: TCornerButton
+        StyledSettings = [Family]
+        Position.X = 234.000000000000000000
+        Position.Y = 242.000000000000000000
+        Sides = [Top, Left, Bottom, Right]
+        Size.Width = 109.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Text = 'Envia Pedido'
+        TextSettings.Font.Size = 17.000000000000000000
+        TextSettings.Font.StyleExt = {00040000000200000004000000}
+        TextSettings.FontColor = claRoyalblue
+        TextSettings.Trimming = None
+        XRadius = 3.000000000000000000
+        YRadius = 3.000000000000000000
+        OnClick = benviapedidoClick
+      end
     end
     object TabItem2: TTabItem
       CustomIcon = <
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 318.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -801,13 +834,14 @@ object FPedido: TFPedido
         object Edenderecoftp: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           TabOrder = 0
-          Text = 'storollicia.duckdns.org'
+          Text = '187.109.101.57'
           Position.X = 183.000000000000000000
           Position.Y = 8.000000000000000000
           Size.Width = 210.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Endere'#231'o FTP'
+          CharCase = ecLowerCase
         end
         object Edporta: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -829,6 +863,17 @@ object FPedido: TFPedido
           TabOrder = 4
           Text = 'Usar Ftp Local'
           OnClick = cbClick
+        end
+        object lmens: TLabel
+          StyledSettings = [Family, Style]
+          Position.X = 13.000000000000000000
+          Position.Y = 497.000000000000000000
+          Size.Width = 267.000000000000000000
+          Size.Height = 31.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 15.000000000000000000
+          TextSettings.FontColor = claChocolate
+          TextSettings.Trimming = None
         end
         object Edusuarioftp: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -855,8 +900,8 @@ object FPedido: TFPedido
       end
       object sbcriabanco: TSpeedButton
         StyledSettings = [Family]
-        Position.X = 9.000000000000000000
-        Position.Y = 427.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 423.000000000000000000
         Size.Width = 171.000000000000000000
         Size.Height = 30.000000000000000000
         Size.PlatformDefault = False
@@ -873,7 +918,7 @@ object FPedido: TFPedido
         StyledSettings = [Family, Style]
         ModalResult = 1
         Position.X = 5.000000000000000000
-        Position.Y = 197.000000000000000000
+        Position.Y = 201.000000000000000000
         Size.Width = 168.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
@@ -885,23 +930,10 @@ object FPedido: TFPedido
         TextSettings.Trimming = None
         OnClick = sbportadoresClick
       end
-      object sblimpapedidos: TSpeedButton
-        StyledSettings = [Family, Style, FontColor]
-        ModalResult = 1
-        Position.X = 57.000000000000000000
-        Position.Y = 445.000000000000000000
-        Size.Width = 223.000000000000000000
-        Size.Height = 48.000000000000000000
-        Size.PlatformDefault = False
-        Text = 'Apaga Pedidos'
-        TextSettings.Font.Size = 30.000000000000000000
-        TextSettings.Trimming = None
-        OnClick = sblimpapedidosClick
-      end
       object Edatedata: TDateEdit
         Date = 42126.000000000000000000
         Position.X = 114.000000000000000000
-        Position.Y = 510.000000000000000000
+        Position.Y = 522.000000000000000000
         Size.Width = 100.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
@@ -910,7 +942,7 @@ object FPedido: TFPedido
       object EdPasta01ftp: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         TabOrder = 13
-        Text = 'Sac??'
+        Text = 'Sac60'
         Position.X = 284.000000000000000000
         Position.Y = 193.000000000000000000
         Size.Width = 197.000000000000000000
@@ -931,10 +963,10 @@ object FPedido: TFPedido
       end
       object spsalvaconfig: TSpeedButton
         StyledSettings = [Family, Size, Style]
-        Position.X = 9.000000000000000000
-        Position.Y = 371.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 358.000000000000000000
         Size.Width = 170.000000000000000000
-        Size.Height = 56.000000000000000000
+        Size.Height = 61.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'buttonstyle'
         Text = 'Salva Configura'#231#227'o'
@@ -945,7 +977,7 @@ object FPedido: TFPedido
       object sbcriaportadores: TSpeedButton
         StyledSettings = [Family]
         Position.X = 205.000000000000000000
-        Position.Y = 332.000000000000000000
+        Position.Y = 313.000000000000000000
         Size.Width = 158.000000000000000000
         Size.Height = 33.000000000000000000
         Size.PlatformDefault = False
@@ -962,7 +994,7 @@ object FPedido: TFPedido
         StyledSettings = [Family, Style]
         ModalResult = 1
         Position.X = 5.000000000000000000
-        Position.Y = 165.000000000000000000
+        Position.Y = 167.000000000000000000
         Size.Width = 168.000000000000000000
         Size.Height = 34.000000000000000000
         Size.PlatformDefault = False
@@ -977,7 +1009,7 @@ object FPedido: TFPedido
       object sbcriaprodutos: TSpeedButton
         StyledSettings = [Family]
         Position.X = 206.000000000000000000
-        Position.Y = 363.000000000000000000
+        Position.Y = 352.000000000000000000
         Size.Width = 158.000000000000000000
         Size.Height = 33.000000000000000000
         Size.PlatformDefault = False
@@ -992,7 +1024,7 @@ object FPedido: TFPedido
       object sbcriaclientes: TSpeedButton
         StyledSettings = [Family]
         Position.X = 205.000000000000000000
-        Position.Y = 395.000000000000000000
+        Position.Y = 389.000000000000000000
         Size.Width = 158.000000000000000000
         Size.Height = 33.000000000000000000
         Size.PlatformDefault = False
@@ -1007,7 +1039,7 @@ object FPedido: TFPedido
       object sbcriaconfig: TSpeedButton
         StyledSettings = [Family]
         Position.X = 205.000000000000000000
-        Position.Y = 426.000000000000000000
+        Position.Y = 422.000000000000000000
         Size.Width = 83.000000000000000000
         Size.Height = 31.000000000000000000
         Size.PlatformDefault = False
@@ -1063,7 +1095,7 @@ object FPedido: TFPedido
         StyledSettings = [Family, Style]
         ModalResult = 1
         Position.X = 5.000000000000000000
-        Position.Y = 266.000000000000000000
+        Position.Y = 272.000000000000000000
         Size.Width = 168.000000000000000000
         Size.Height = 34.000000000000000000
         Size.PlatformDefault = False
@@ -1168,7 +1200,7 @@ object FPedido: TFPedido
       end
       object AniIndicator1: TAniIndicator
         Position.X = 272.000000000000000000
-        Position.Y = 472.000000000000000000
+        Position.Y = 467.000000000000000000
         Size.Width = 46.000000000000000000
         Size.Height = 46.000000000000000000
         Size.PlatformDefault = False
@@ -1177,7 +1209,7 @@ object FPedido: TFPedido
       object sbestrtura: TSpeedButton
         StyledSettings = [Family]
         Position.X = 288.000000000000000000
-        Position.Y = 426.000000000000000000
+        Position.Y = 422.000000000000000000
         Size.Width = 76.000000000000000000
         Size.Height = 31.000000000000000000
         Size.PlatformDefault = False
@@ -1249,7 +1281,7 @@ object FPedido: TFPedido
         StyledSettings = [Family, Style]
         ModalResult = 1
         Position.X = 5.000000000000000000
-        Position.Y = 232.000000000000000000
+        Position.Y = 236.000000000000000000
         Size.Width = 168.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
@@ -1289,7 +1321,7 @@ object FPedido: TFPedido
       object sbimportahistmestre: TSpeedButton
         StyledSettings = [Size, Style]
         Position.X = 4.000000000000000000
-        Position.Y = 300.000000000000000000
+        Position.Y = 312.000000000000000000
         Size.Width = 169.000000000000000000
         Size.Height = 39.000000000000000000
         Size.PlatformDefault = False
@@ -1300,29 +1332,32 @@ object FPedido: TFPedido
         TextSettings.Trimming = None
         OnClick = sbimportahistmestreClick
       end
-      object lmens: TLabel
-        StyledSettings = [Family, Style]
-        Position.X = 8.000000000000000000
-        Position.Y = 482.000000000000000000
-        Size.Width = 364.000000000000000000
-        Size.Height = 30.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.Font.Size = 15.000000000000000000
-        TextSettings.FontColor = claChocolate
-        TextSettings.Trimming = None
-        TabOrder = 98
-      end
-      object Memomsg: TMemo
-        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-        DataDetectorTypes = []
+      object Memomsg: TListBox
         Position.X = 9.000000000000000000
-        Position.Y = 568.000000000000000000
-        Size.Width = 354.000000000000000000
-        Size.Height = 74.000000000000000000
+        Position.Y = 550.000000000000000000
+        Size.Width = 267.000000000000000000
+        Size.Height = 144.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 99
-        Viewport.Width = 346.000000000000000000
-        Viewport.Height = 66.000000000000000000
+        TabOrder = 98
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        Viewport.Width = 267.000000000000000000
+        Viewport.Height = 144.000000000000000000
+      end
+      object sblimpapedidos: TSpeedButton
+        StyledSettings = [Family, Style, FontColor]
+        ModalResult = 1
+        Position.X = 28.000000000000000000
+        Position.Y = 456.000000000000000000
+        Size.Width = 223.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Apaga Pedidos'
+        TextSettings.Font.Size = 30.000000000000000000
+        TextSettings.Trimming = None
+        OnClick = sblimpapedidosClick
       end
     end
     object PathAnimation1: TPathAnimation
@@ -1376,7 +1411,7 @@ object FPedido: TFPedido
     Params = <>
     Response = RESTResponse1
     SynchronizedEvents = False
-    Left = 464
-    Top = 191
+    Left = 416
+    Top = 231
   end
 end

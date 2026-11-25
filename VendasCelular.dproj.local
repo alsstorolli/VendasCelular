@@ -31,6 +31,6 @@
     <Transaction>2026/11/23 10:22:15.000.293,=C:\ProjetosDelphi12.1\VendasCelular\produtos2.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android64="VC4DLNROHQW8MROJ" Android=""/>
+		<NoProfile Android64="" Android="VC4DLNROHQW8MROJ"/>
 	</ActiveMobileDevice>
 </BorlandProject>

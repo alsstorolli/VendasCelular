@@ -63,17 +63,18 @@ begin
   // Certifique-se de que o arquivo existe
   if TFile.Exists(xarq) then
   begin
-
-  //    LUri := TJnet_Uri.JavaClass.parse(StringToJString(arquivo));
-//    Luri := TJFileProvider.JavaClass.GeturiForFile();
+ {
     LUri    := TAndroidHelper.StrToJURI(xarq);
     Intent := TJIntent.Create;
     Intent.setAction(TJIntent.JavaClass.ACTION_VIEW);
     Intent.setDataAndType(LUri,StringToJString('application/pdf'));
-    Intent.addFlags(TJIntent.JavaClass.FLAG_GRANT_READ_URI_PERMISSION); // Conceder permissão de leitura
+    }
+  // Converte o caminho físico para content:// usando o FileProvider do Delphi
+    LURI := TAndroidHelper.JFileToJURI(TJFile.JavaClass.init(StringToJString(xarq)));
+    Intent := TJIntent.JavaClass.init(TJIntent.JavaClass.ACTION_VIEW);
+    Intent.setDataAndType(LURI, StringToJString('application/pdf'));
 
-//    ShowMessage('Antes de abrir o pdf em xarq='+xarq);
-    // 3. Iniciar a atividade no Android
+    Intent.addFlags(TJIntent.JavaClass.FLAG_GRANT_READ_URI_PERMISSION); // Conceder permissão de leitura
     try
         SharedActivity.startActivity(Intent);
 //        TAndroidHelper.Activity.startActivity(Intent);

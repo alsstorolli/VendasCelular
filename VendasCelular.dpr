@@ -38,5 +38,6 @@ begin
   Application.CreateForm(TFVePDF, FVePDF);
   Application.CreateForm(TFClientes1, FClientes1);
   Application.CreateForm(TFProdutos2, FProdutos2);
+  Application.CreateForm(TFProdutos2, FProdutos2);
   Application.Run;
 end.

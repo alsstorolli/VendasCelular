@@ -140,6 +140,7 @@ type
     Rectangle1: TRectangle;
     sbimportahistmestre: TSpeedButton;
     Memomsg: TListBox;
+    Situacao: TStringColumn;
     procedure sbclientesClick(Sender: TObject);
     procedure sbimpclientesClick(Sender: TObject);
     procedure cbClick(Sender: TObject);
@@ -197,6 +198,9 @@ type
     procedure bgerapdfClick(Sender: TObject);
     procedure benviapedidoClick(Sender: TObject);
     procedure sbimportahistmestreClick(Sender: TObject);
+    procedure sgpedidosDrawColumnCell(Sender: TObject; const Canvas: TCanvas;
+      const Column: TColumn; const Bounds: TRectF; const Row: Integer;
+      const Value: TValue; const State: TGridDrawStates);
   private
     { Private declarations }
 
@@ -756,7 +760,7 @@ begin
      numerodoc:=1
    else begin
      Dm.Q.SQL.Clear;
-     dm.Q.SQL.Add('select max(mped_numerodoc) as ultimo from movped' );
+     dm.Q.SQL.Add('select max(mped_numerodoc) as ultimo from movped where mped_status=''N''' );
      dm.Q.Open();
      numerodoc:=dm.Q.fieldbyname('ultimo').asinteger+1;
    end;
@@ -3027,6 +3031,36 @@ begin
    showmessage('entrou no onclick');
 end;
 
+procedure TFPedido.sgpedidosDrawColumnCell(Sender: TObject;
+  const Canvas: TCanvas; const Column: TColumn; const Bounds: TRectF;
+  const Row: Integer; const Value: TValue; const State: TGridDrawStates);
+ var Cor: TAlphaColor;
+ begin
+  if row>=0 then begin
+     if sgpedidos.Cells[4, Row] = 'U' then
+        Cor := TAlphaColors.Lightcoral
+      else
+        Cor := TAlphaColors.Blue;
+     Canvas.Font.Assign(sgpedidos.TextSettings.Font);
+     if (sgpedidos.Cells[4, Row] = 'U')
+        and
+        (column.OriginalIndex=1)
+     then begin
+        Canvas.Fill.Color := Cor;
+//        Canvas.FillRect(Bounds, 0, 0, [], 1);
+        Canvas.FillText(
+          Bounds,
+          Value.ToString,
+          False,
+          1.0,
+          [],
+          TTextAlign.Leading, // Alinhamento horizontal (Leading = Esquerda)
+          TTextAlign.Center   // Alinhamento vertical
+          );
+     end
+  end;
+end;
+
 procedure TFPedido.sgpedidosSelectCell(Sender: TObject; const ACol,  ARow: Integer; var CanSelect: Boolean);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var p:integer;
@@ -3380,7 +3414,7 @@ begin
 
   dm.Q.SQL.Add('select movped.*,clie_nome from movped inner join clientes on ( clie_codigo=mped_tipo_codigo )'+
                sqlcliente+
-               ' order by mped_datamvto' );
+               ' order by mped_datamvto,mped_status' );
   dm.Q.Open();
 
  // sgpedidos.RowCount:=1;
@@ -3392,12 +3426,14 @@ begin
       sgpedidos.Cells[1,p]:='';
       sgpedidos.Cells[2,p]:='';
       sgpedidos.Cells[3,p]:='';
+      sgpedidos.Cells[4,p]:='';
   end;
 
 //  showmessage( 'limpou grid' );
 //  Memomsg.Visible:=false;
   xtot:=0;p:=0;
   sgpedidos.RowCount:=1;
+  Edtotalpedidos.Text:='';
   while not dm.q.eof do begin
 //    if dm.Q.FieldByName('mped_datamvto').AsDateTime=Strtodate(EdData.Text) then begin
 //    if dm.Q.FieldByName('mped_datamvto').AsDateTime=EdData.Date then begin
@@ -3411,6 +3447,8 @@ begin
       sgpedidos.Cells[1,p]:=dm.Q.FieldByName('clie_nome').AsString;
       sgpedidos.Cells[2,p]:=dm.Q.FieldByName('mped_datamvto').AsString;
       sgpedidos.Cells[3,p]:='   '+FormatCurr('###,##0.00',dm.Q.FieldByName('mped_vlrtotal').AsCurrency);
+// 26.11.26
+      sgpedidos.Cells[4,p]:=dm.Q.FieldByName('mped_status').AsString;
       sgpedidos.RowCount:=sgpedidos.RowCount+1;
       xtot:=xtot+dm.Q.FieldByName('mped_vlrtotal').Ascurrency;
       inc(p);
@@ -3418,6 +3456,8 @@ begin
     dm.q.next;
   end;
   Edtotalpedidos.Text:=currtostr(xtot);
+//  Edtotalpedidos.Text:=floattostr(xtot);
+//  Edtotalpedidos.Text:=FormatCurr('###,##0.00',xtot);
   dm.Q.Close;
   sgpedidosd.RowCount:=0;
 end;

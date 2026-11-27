@@ -244,7 +244,7 @@ begin
   arquivo:=  TPath.Combine(TPath.GetSharedDocumentsPath, nomearquivo);    // assim salva na pasta 'documents'
   pdf.SaveToFile( arquivo );
 
-  showmessage('arquivo salvo em '+arquivo);
+//  showmessage('arquivo salvo em '+arquivo);
 
 //  FVisualizapdf.Execute(arquivo);
   FVepdf.Execute(arquivo);
